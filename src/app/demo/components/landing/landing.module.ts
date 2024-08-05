@@ -7,6 +7,11 @@ import { DividerModule } from 'primeng/divider';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { AvatarModule } from 'primeng/avatar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -14,9 +19,14 @@ import { ButtonModule } from 'primeng/button';
         LandingRoutingModule,
         DividerModule,
         StyleClassModule,
+        FormsModule,
         ChartModule,
         PanelModule,
-        ButtonModule
+        ButtonModule,
+        DialogModule,
+        InputTextModule,
+        InputMaskModule,
+        AvatarModule
     ],
     declarations: [LandingComponent]
 })
