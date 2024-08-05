@@ -1,5 +1,4 @@
 <p align="center">
-  <h2>ContribuGuate</h2>
   <a target="blank"><img src="./logo.png" width="200" alt="ContribuGuate Logo" /></a>
 </p>
 
