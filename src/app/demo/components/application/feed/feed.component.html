@@ -1,0 +1,68 @@
+<div class="app-container">
+    <!-- Barra lateral -->
+    <div class="sidebar">
+      <div class="profile-summary">
+        <img src="path/to/profile-picture.jpg" alt="Profile Picture" class="profile-pic">
+        <div class="profile-info">
+          <h4>Vera Cherry</h4>
+          <p>Bremen, Germany</p>
+        </div>
+      </div>
+      <div class="sidebar-menu">
+        <p-menu [model]="items"></p-menu>
+      </div>
+    </div>
+  
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <div class="stories">
+        <div class="story" *ngFor="let story of stories">
+          <img [src]="story.image" alt="{{story.name}}">
+          <p>{{ story.name }}</p>
+        </div>
+      </div>
+  
+      <div class="feed">
+        <p-card *ngFor="let post of posts" class="feed-card">
+          <ng-template pTemplate="header">
+            <div class="feed-card-header">
+              <img [src]="post.profilePic" alt="Profile Picture" class="post-profile-pic">
+              <div class="post-info">
+                <h5>{{ post.username }}</h5>
+                <p>{{ post.location }}</p>
+              </div>
+              <p-button icon="pi pi-ellipsis-h" styleClass="p-button-text"></p-button>
+            </div>
+          </ng-template>
+          <div class="feed-card-content">
+            <p>{{ post.description }}</p>
+            <img [src]="post.image" alt="Post Image" class="feed-post-image">
+          </div>
+          <ng-template pTemplate="footer">
+            <div class="feed-card-footer">
+              <div class="post-actions">
+                <p-button icon="pi pi-heart" styleClass="p-button-text"></p-button>
+                <p-button icon="pi pi-comment" styleClass="p-button-text"></p-button>
+                <p-button icon="pi pi-share-alt" styleClass="p-button-text"></p-button>
+              </div>
+              <p>{{ post.likes }} Likes</p>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+  
+    <!-- Barra lateral derecha -->
+    <div class="right-sidebar">
+      <div class="trending-feeds">
+        <!-- Contenido para feeds populares -->
+      </div>
+      <div class="suggestions">
+        <!-- Contenido para sugerencias -->
+      </div>
+      <div class="profile-activity">
+        <!-- Contenido para actividad de perfil -->
+      </div>
+    </div>
+  </div>
+  

@@ -12,6 +12,8 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from "ngx-ui-loader";
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
@@ -31,6 +33,15 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from "ngx-ui-loader";
         }),
         NgxUiLoaderHttpModule.forRoot({
             showForeground: true
+        }),
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            autoDismiss: true,
+            closeButton: true,
+            progressBar: true,
+            countDuplicates: true,
+            tapToDismiss: true,
+            progressAnimation: "decreasing"
         })
     ],
     providers: [

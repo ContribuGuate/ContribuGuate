@@ -11,5 +11,9 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.primengConfig.ripple = true;
+        this.primengConfig.translation.passwordPrompt = 'Ingresa una contraseña';
+        this.primengConfig.translation.weak = 'Poco segura';
+        this.primengConfig.translation.medium = 'Medio';
+        this.primengConfig.translation.strong = 'Segura';
     }
 }

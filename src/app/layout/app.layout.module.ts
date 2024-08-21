@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
@@ -17,6 +17,13 @@ import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
+import { ButtonModule } from 'primeng/button';
+import { AppNavbarComponent } from './app.navbar.component';
+import { StyleClassModule } from 'primeng/styleclass';
+import { DividerModule } from 'primeng/divider';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
     declarations: [
@@ -26,6 +33,7 @@ import { AppLayoutComponent } from "./app.layout.component";
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
+        AppNavbarComponent
     ],
     imports: [
         BrowserModule,
@@ -39,8 +47,15 @@ import { AppLayoutComponent } from "./app.layout.component";
         InputSwitchModule,
         RippleModule,
         RouterModule,
-        AppConfigModule
+        AppConfigModule,
+        ButtonModule,
+        StyleClassModule,
+        DividerModule,
+        ReactiveFormsModule,
+        PanelModule,
+        DialogModule,
+        InputMaskModule
     ],
-    exports: [AppLayoutComponent]
+    exports: [AppLayoutComponent, AppNavbarComponent]
 })
 export class AppLayoutModule { }

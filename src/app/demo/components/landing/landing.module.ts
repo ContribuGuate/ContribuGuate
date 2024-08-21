@@ -11,7 +11,8 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
 import { InputMaskModule } from 'primeng/inputmask';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 @NgModule({
     imports: [
@@ -20,13 +21,15 @@ import { FormsModule } from '@angular/forms';
         DividerModule,
         StyleClassModule,
         FormsModule,
+        ReactiveFormsModule,
         ChartModule,
         PanelModule,
         ButtonModule,
         DialogModule,
         InputTextModule,
         InputMaskModule,
-        AvatarModule
+        AvatarModule,
+        ScrollTopModule
     ],
     declarations: [LandingComponent]
 })
