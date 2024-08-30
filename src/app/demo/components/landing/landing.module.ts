@@ -29,7 +29,8 @@ import { ScrollTopModule } from 'primeng/scrolltop';
         InputTextModule,
         InputMaskModule,
         AvatarModule,
-        ScrollTopModule
+        ScrollTopModule,
+        InputMaskModule
     ],
     declarations: [LandingComponent]
 })

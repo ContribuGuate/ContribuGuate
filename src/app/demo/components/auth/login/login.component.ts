@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -24,7 +25,9 @@ export class LoginComponent {
 
     loginForm: FormGroup;
 
-    constructor(public layoutService: LayoutService, private authService: AuthService, private fb: FormBuilder, private toast: ToastrService) { 
+    constructor(public layoutService: LayoutService, private authService: AuthService, private fb: FormBuilder, private toast: ToastrService,
+        private router: Router
+    ) { 
         this.loginForm = this.fb.group({
             email: ['', Validators.required],
             password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
@@ -41,6 +44,7 @@ export class LoginComponent {
                     timeOut: 3500
                 });
                 localStorage.setItem('contribuguateToken', e.token);
+                this.router.navigate(['/app/feed'])
             }else{
                 this.toast.error(e.message, "Autenticacion", {
                     timeOut: 3500

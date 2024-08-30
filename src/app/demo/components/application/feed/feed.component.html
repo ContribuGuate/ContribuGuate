@@ -1,68 +1,79 @@
-<div class="app-container">
-    <!-- Barra lateral -->
-    <div class="sidebar">
-      <div class="profile-summary">
-        <img src="path/to/profile-picture.jpg" alt="Profile Picture" class="profile-pic">
-        <div class="profile-info">
-          <h4>Vera Cherry</h4>
-          <p>Bremen, Germany</p>
-        </div>
-      </div>
-      <div class="sidebar-menu">
-        <p-menu [model]="items"></p-menu>
-      </div>
-    </div>
-  
-    <!-- Contenido principal -->
-    <div class="main-content">
-      <div class="stories">
-        <div class="story" *ngFor="let story of stories">
-          <img [src]="story.image" alt="{{story.name}}">
-          <p>{{ story.name }}</p>
-        </div>
-      </div>
-  
-      <div class="feed">
-        <p-card *ngFor="let post of posts" class="feed-card">
-          <ng-template pTemplate="header">
-            <div class="feed-card-header">
-              <img [src]="post.profilePic" alt="Profile Picture" class="post-profile-pic">
-              <div class="post-info">
-                <h5>{{ post.username }}</h5>
-                <p>{{ post.location }}</p>
-              </div>
-              <p-button icon="pi pi-ellipsis-h" styleClass="p-button-text"></p-button>
-            </div>
-          </ng-template>
-          <div class="feed-card-content">
-            <p>{{ post.description }}</p>
-            <img [src]="post.image" alt="Post Image" class="feed-post-image">
+<div class="surface-0 flex justify-content-center">
+  <div id="home" class="landing-wrapper overflow-hidden">
+
+    <!-- <app-auth-navbar></app-auth-navbar> -->
+
+    <!-- <p-inputSwitch [ngModel]="darkMode" (ngModelChange)="onToggleDarkMode()" /> -->
+
+
+    <div id="hero" class="surface-card p-4 border-round">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div *ngFor="let post of posts" class="surface-card p-4 border-round">
+          <img src="{{ post.image }}" alt="Imagen del post" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h5 class="text-900 font-medium">{{ post.title }}</h5>
+            <p class="text-600">{{ post.description }}</p>
+            <p-button pRipple [text]="true" [plain]="true" label="Me gusta" icon="pi pi-heart"
+              iconPos="left"></p-button>
+            <p-button pRipple [text]="true" [plain]="true" label="Comentarios" icon="pi pi-comment"
+              iconPos="left"></p-button>
           </div>
-          <ng-template pTemplate="footer">
-            <div class="feed-card-footer">
-              <div class="post-actions">
-                <p-button icon="pi pi-heart" styleClass="p-button-text"></p-button>
-                <p-button icon="pi pi-comment" styleClass="p-button-text"></p-button>
-                <p-button icon="pi pi-share-alt" styleClass="p-button-text"></p-button>
-              </div>
-              <p>{{ post.likes }} Likes</p>
-            </div>
-          </ng-template>
-        </p-card>
+        </div>
       </div>
     </div>
-  
-    <!-- Barra lateral derecha -->
-    <div class="right-sidebar">
-      <div class="trending-feeds">
-        <!-- Contenido para feeds populares -->
-      </div>
-      <div class="suggestions">
-        <!-- Contenido para sugerencias -->
-      </div>
-      <div class="profile-activity">
-        <!-- Contenido para actividad de perfil -->
+
+
+
+    <div class="py-4 px-4 mx-0 mt-8 lg:mx-8">
+      <div class="grid justify-content-between">
+        <div class="col-12 md:col-2" style="margin-top:-1.5rem;">
+          <a
+            class="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
+            <img src="../../../../assets/layout/images/logo outline.png" alt="footer sections" width="50" height="50"
+              class="mr-2">
+            <h4 class="font-medium text-3xl text-900">ContribuGuate</h4>
+          </a>
+        </div>
+
+        <div class="col-12 md:col-10 lg:col-7">
+          <div class="grid text-center md:text-left">
+            <div class="col-12 md:col-3">
+              <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Company</h4>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">About Us</a>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Investor Relations</a>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>
+              <a class="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a>
+            </div>
+
+            <div class="col-12 md:col-3 mt-4 md:mt-0">
+              <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
+              <a class="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a>
+            </div>
+
+            <div class="col-12 md:col-3 mt-4 md:mt-0">
+              <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Discord</a>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img
+                  src="assets/demo/images/landing/new-badge.svg" class="ml-2" /></a>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
+              <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
+            </div>
+
+            <div class="col-12 md:col-3 mt-4 md:mt-0">
+              <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Brand Policy</a>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
+              <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>
+
+
+<p-scrollTop />

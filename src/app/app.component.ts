@@ -15,5 +15,7 @@ export class AppComponent implements OnInit {
         this.primengConfig.translation.weak = 'Poco segura';
         this.primengConfig.translation.medium = 'Medio';
         this.primengConfig.translation.strong = 'Segura';
+        // this.primengConfig.translation.emptyFilterMessage = 'Sin filtro';
+        // this.primengConfig.translation.emptySearchMessage = 'Sin resultados.';
     }
 }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
@@ -6,41 +8,29 @@ import { Component } from '@angular/core';
   styleUrl: './feed.component.scss'
 })
 export class FeedComponent {
-  stories = [
-    { image: 'path/to/story1.jpg', name: 'Pandana' },
-    { image: 'path/to/story2.jpg', name: 'Ben Schade' },
-    { image: 'path/to/story3.jpg', name: 'Shulia' },
-    // más historias
-  ];
 
   posts = [
     {
-      profilePic: 'path/to/profile1.jpg',
-      username: 'Masadur Rahman',
-      location: 'Bremen, Germany',
-      description: 'Apply for a feature following the link in our bio...',
-      image: 'path/to/post1.jpg',
-      likes: 281,
+      image: 'https://picsum.photos/200/300',
+      title: 'Post 1',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
     },
     {
-      profilePic: 'path/to/profile2.jpg',
-      username: 'Organization 2',
-      location: 'Berlin, Germany',
-      description: 'Check out this amazing place...',
-      image: 'path/to/post2.jpg',
-      likes: 152,
-    }
-    // más publicaciones
+      image: 'https://picsum.photos/200/301',
+      title: 'Post 2',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    {
+      image: 'https://picsum.photos/200/302',
+      title: 'Post 3',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    // ...
   ];
 
-  items:any[] = [
-    {label: 'Feed', icon: 'pi pi-home', command: () => { /* lógica para Feed */ }},
-    {label: 'Explore', icon: 'pi pi-compass'},
-    {label: 'My Favorites', icon: 'pi pi-heart'},
-    {label: 'IG TV', icon: 'pi pi-play-circle'},
-    {label: 'Stats', icon: 'pi pi-chart-line'},
-    {label: 'Settings', icon: 'pi pi-cog'},
-    {label: 'Log out', icon: 'pi pi-sign-out'}
-  ];
-  constructor(){}
+
+  constructor(public router: Router){}
+
+
+  
 }
