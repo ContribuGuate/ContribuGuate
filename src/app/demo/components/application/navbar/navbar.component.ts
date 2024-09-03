@@ -30,7 +30,7 @@ export class AppNavbarComponent {
                     label: 'Mis comunidades',
                     icon: 'pi pi-sitemap',
                     command: () => {
-                        
+                        this.router.navigate(['/app/communities/my']);
                     }
                 },
                 {
@@ -97,8 +97,10 @@ export class AppNavbarComponent {
         const linkElem = this.#document.getElementById('theme-css') as HTMLLinkElement;
         if(this.darkMode == true){
           linkElem.href = 'assets/layout/styles/theme/md-dark-indigo/theme.css'
+          localStorage.setItem('system.Theme', 'dark');
         }else{
           linkElem.href = 'assets/layout/styles/theme/md-light-indigo/theme.css'
+          localStorage.setItem('system.Theme', 'light');
         }
       }
 }

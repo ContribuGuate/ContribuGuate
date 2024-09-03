@@ -34,6 +34,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TabView, TabViewModule } from 'primeng/tabview';
+import { MycommunitiesComponent } from './mycommunities/mycommunities.component';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { TabView, TabViewModule } from 'primeng/tabview';
     FeedComponent,
     CommunitiesComponent,
     AppNavbarComponent,
-    CommunityComponent
+    CommunityComponent,
+    MycommunitiesComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +73,9 @@ import { TabView, TabViewModule } from 'primeng/tabview';
     InputSwitchModule,
     FormsModule,
     InputGroupModule,
-    TabViewModule
+    TabViewModule,
+    AvatarModule,
+    PanelModule
   ],
   providers: [MessageService, CommunityService, TabView]
 })

@@ -1,66 +1,87 @@
 <!-- organization.component.html -->
 <div class="p-grid p-nogutter organization-container" *ngIf="communityObj">
-    <div class="p-col-12 p-md-4 p-lg-3 organization-info">
-      <div class="organization-header">
-        <img src="assets/organization-logo.png" alt="Organization Logo" class="organization-logo" />
-        <h2>{{communityObj.name}}</h2>
-        <p>{{communityObj.description}}</p>
-        <!-- <p><strong>Contact:</strong> contactorganization.org</p> -->
-        <p-tabView>
-            <p-tabPanel header="Header I">
-                <p>
-                    Lorem ipsum dolor sit amet...
-                </p>
-            </p-tabPanel>
-            <p-tabPanel header="Header II">
-                <p>
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium...
-                </p>
-            </p-tabPanel>
-            <p-tabPanel header="Header III">
-                <p>
-                    At vero eos et accusamus et iusto odio dignissimos...
-                </p>
-            </p-tabPanel>
-        </p-tabView>
-      </div>
-      <div class="organization-members">
-        <p><strong>Members:</strong> 150</p>
-        <div class="p-grid p-nogutter">
-          <div class="p-col-12 p-md-6 member-card">
-            <h3>John Doe</h3>
-            <p>Role: Project Manager</p>
-          </div>
-          <div class="p-col-12 p-md-6 member-card">
-            <h3>Jane Smith</h3>
-            <p>Role: Volunteer Lead</p>
-          </div>
-          <div class="p-col-12 p-md-6 member-card">
-            <h3>Michael Brown</h3>
-            <p>Role: IT Support</p>
-          </div>
-        </div>
-      </div>
-    
-    </div>
-  
-    <div class="p-col-12 p-md-8 p-lg-9">
-  
-      <div class="recent-publications" *ngIf="communityObj.public">
-        <h2>Recent Publications</h2>
-        <div class="p-grid p-nogutter">
-          <div class="p-col-12 p-md-6 p-lg-4" *ngFor="let post of posts">
-            <div class="post-card">
-              <img [src]="post.image" alt="Post Image" class="post-image" />
-              <div class="post-content">
-                <h3>{{ post.title }}</h3>
-                <p>{{ post.description }}</p>
-                <small>Posted on: {{ post.date | date }}</small>
+  <div class="p-col-12 p-md-4 p-lg-3 organization-info">
+    <div class="organization-header">
+      <img [src]="logosEndpoint + organization" alt="Organization Logo" class="organization-logo" />
+      <h2>{{communityObj.name}}</h2>
+      <p>{{communityObj.description}}</p>
+      <!-- <p><strong>Contact:</strong> contactorganization.org</p> -->
+      <p-tabView *ngIf="communityObj.organization">
+        <p-tabPanel header="Info. organizacion">
+          <p-panel>
+            <p>
+              <strong>Nombre organizacion propietaria: </strong>{{communityObj.organization.name}}<br />
+              <strong>Objetivo organizacion: </strong>{{communityObj.organization.description}}<br />
+            </p>
+        </p-panel>
+        </p-tabPanel>
+        <p-tabPanel header="Contacto">
+          <p-panel>
+            <p>
+              <strong>Direccion: </strong>{{communityObj.organization.address !== '' && communityObj.organization.address
+              !== null ? communityObj.organization.address : '(Sin direccion)'}}<br />
+              <strong>Contacto: </strong>{{communityObj.organization.contact}}<br />
+              <strong>Website: </strong> <a target="_blank"
+                href="{{communityObj.organization.website}}">{{communityObj.organization.website}}</a>
+            </p>
+        </p-panel>
+        
+          
+        </p-tabPanel>
+
+        <p-tabPanel header="Miembros" *ngIf="communityObj.communityMemberships">
+          <p-dataView #dv [value]="communityObj.communityMemberships">
+            <ng-template pTemplate="list" let-products>
+              <div class="grid grid-nogutter">
+                <div class="col-12" *ngFor="let item of products; let first = first" class="col-12">
+                  <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3"
+                    [ngClass]="{ 'border-top-1 surface-border': !first }">
+                    <div class="md:w-10rem relative">
+                      <p-avatar [label]="getUserLabel(item.user.person)" styleClass="mr-2" size="xlarge" />
+                    </div>
+                    <div
+                      class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
+                      <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+                        <div>
+                          <div class="text-lg font-medium text-900 mt-2">{{ item.user.person.firstname }} {{ item.user.person.surname }}</div>
+                          <span class="font-medium text-secondary text-sm"> {{'@'+ item.user.username }} </span>
+                        </div>
+
+                      </div>
+                      <div class="flex flex-column md:align-items-end gap-5">
+                        <div class="flex flex-row-reverse md:flex-row gap-2">
+                          <p-tag severity="success" [value]="item.role.label"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </ng-template>
+          </p-dataView>
+        </p-tabPanel>
+
+      </p-tabView>
+    </div>
+
+  </div>
+
+  <div class="p-col-12 p-md-8 p-lg-9">
+
+    <div class="recent-publications" *ngIf="communityObj.public">
+      <h2>Recent Publications</h2>
+      <div class="p-grid p-nogutter">
+        <div class="p-col-12 p-md-6 p-lg-4" *ngFor="let post of posts">
+          <div class="post-card">
+            <img [src]="post.image" alt="Post Image" class="post-image" />
+            <div class="post-content">
+              <h3>{{ post.title }}</h3>
+              <p>{{ post.description }}</p>
+              <small>Posted on: {{ post.date | date }}</small>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

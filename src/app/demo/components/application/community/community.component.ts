@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommunityService } from 'src/app/services/community.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-community',
@@ -9,7 +10,7 @@ import { CommunityService } from 'src/app/services/community.service';
   styleUrl: './community.component.scss'
 })
 export class CommunityComponent {
-
+  public logosEndpoint = environment.baseUrl + 'community/logo/'
   public organization: any = ''
   public communityObj: any = {}
 
@@ -45,5 +46,9 @@ export class CommunityComponent {
         }
       })
   })
+  }
+
+  public getUserLabel(user){
+    return user.firstname.charAt(0) + user.surname.charAt(0);
   }
 }

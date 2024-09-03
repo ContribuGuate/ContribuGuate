@@ -4,6 +4,7 @@ import { MainComponent } from './main/main.component';
 import { FeedComponent } from './feed/feed.component';
 import { CommunitiesComponent } from './communities/communities.component';
 import { CommunityComponent } from './community/community.component';
+import { MycommunitiesComponent } from './mycommunities/mycommunities.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'communities',
         component: CommunitiesComponent
+      },
+      {
+        path: 'communities/my',
+        component: MycommunitiesComponent
       },
       {
         path: 'community/:id',
