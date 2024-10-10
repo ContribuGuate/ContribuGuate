@@ -36,6 +36,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { TabView, TabViewModule } from 'primeng/tabview';
 import { MycommunitiesComponent } from './mycommunities/mycommunities.component';
 import { PanelModule } from 'primeng/panel';
+import { CreatecommunityComponent } from './createcommunity/createcommunity.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { PanelModule } from 'primeng/panel';
     CommunitiesComponent,
     AppNavbarComponent,
     CommunityComponent,
-    MycommunitiesComponent
+    MycommunitiesComponent,
+    CreatecommunityComponent
   ],
   imports: [
     CommonModule,

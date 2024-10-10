@@ -46,6 +46,13 @@ export class AppNavbarComponent {
                     command: () => {
                         this.joinCommunityVisible = true;
                     }
+                },
+                {
+                    label: 'Crea la tuya',
+                    icon: 'pi pi-plus',
+                    command: () => {
+                        this.router.navigate(['/app/communities/create']);
+                    }
                 }
             ]
         },

@@ -35,12 +35,12 @@ export class RegisterComponent{
     constructor(public layoutService: LayoutService, private fb: FormBuilder, private cdr: ChangeDetectorRef) { 
         this.registerForm = this.fb.group({
             email: ['', Validators.required],
-            password: ['']
+            password: ['', Validators.required]
         })
     }
 
     public doRegister(){
-
+      console.log(this.registerForm.value);
     }
 
     handleReset(): void {

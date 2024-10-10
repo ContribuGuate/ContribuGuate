@@ -9,7 +9,7 @@
             <div class="col-12" *ngFor="let item of products; let first = first" class="col-12">
                 <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3" [ngClass]="{ 'border-top-1 surface-border': !first }">
                     <div class="md:w-10rem relative">
-                        <img class="block xl:block mx-auto border-round w-full" [src]="logosEndpoint + item.uuid" [alt]="item.name" />
+                        <img class="block xl:block mx-auto border-round w-full" src="https://png.pngtree.com/png-vector/20190214/ourmid/pngtree-people-icon-business-corporate-team-working-together-social-network-png-image_448341.jpg" [alt]="item.name" />
                         <p-tag [value]="'Publica'" *ngIf="item.public" [severity]="getSeverity(item)" class="absolute" [style.left.px]="4" [style.top.px]="4" />
                         <p-tag [value]="'Privada'" *ngIf="!item.public" [severity]="getSeverity(item)" class="absolute" [style.left.px]="4" [style.top.px]="4" />
                     </div>
@@ -38,7 +38,7 @@
                 <div class="p-4 border-1 surface-border surface-card border-round flex flex-column">
                     <div class="surface-50 flex justify-content-center border-round p-3">
                         <div class="relative mx-auto">
-                            <img class="border-round w-full" [src]="logosEndpoint + product.uuid" [alt]="product.name" style="max-width: 300px;" />
+                            <img class="border-round w-full" src="https://png.pngtree.com/png-vector/20190214/ourmid/pngtree-people-icon-business-corporate-team-working-together-social-network-png-image_448341.jpg" [alt]="product.name" style="max-width: 300px;" />
                             <p-tag [value]="'Publica'" *ngIf="product.public" [severity]="getSeverity(product)" class="absolute" [style.left.px]="4" [style.top.px]="4" />
                             <p-tag [value]="'Privada'" *ngIf="!product.public" [severity]="getSeverity(product)" class="absolute" [style.left.px]="4" [style.top.px]="4" />
                         </div>

@@ -48,12 +48,12 @@
                                     </div>
                                     <div class="field col-6 md:col-6">
                                         <label htmlFor="usermail">Correo electronico</label>
-                                        <input pInputText id="usermail" type="email" placeholder="example@dogs.com" />
+                                        <input formControlName="email" pInputText id="usermail" type="email" placeholder="example@dogs.com" />
                                     </div>
                                    
                                     <div class="field col-6 md:col-6">
                                         <label htmlFor="firstname2">Contraseña *</label>
-                                        <p-password />
+                                        <p-password formControlName="password" />
                                     </div>
 
                                     <div class="field col-6 md:col-6">
@@ -85,7 +85,7 @@
                     <p-password id="password1" formControlName="password" placeholder="Ingresa tu contraseña segura" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password> -->
 
                         <button pButton pRipple label="Registrarse" class="w-full p-3 text-xl"
-                            [disabled]="!registerForm.valid" (click)="doRegister()"></button>
+                          [disabled]="!registerForm.valid && captchaElem"  (click)="doRegister()"></button>
                     </form>
                 </div>
             </div>

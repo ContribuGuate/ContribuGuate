@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
@@ -6,9 +7,17 @@ import { PrimeNGConfig } from 'primeng/api';
     templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-
-    constructor(private primengConfig: PrimeNGConfig) { }
-
+    #document = inject(DOCUMENT);
+    constructor(private primengConfig: PrimeNGConfig) {
+        const linkElem = this.#document.getElementById('theme-css') as HTMLLinkElement;
+        const store = localStorage.getItem('system.Theme') ?? 'dark';
+        if(store == 'light'){
+          linkElem.href = 'assets/layout/styles/theme/md-dark-indigo/theme.css'
+        }else if(store == 'dark'){
+          linkElem.href = 'assets/layout/styles/theme/md-light-indigo/theme.css'
+        }
+     }
+    
     ngOnInit() {
         this.primengConfig.ripple = true;
         this.primengConfig.translation.passwordPrompt = 'Ingresa una contraseña';
@@ -17,5 +26,7 @@ export class AppComponent implements OnInit {
         this.primengConfig.translation.strong = 'Segura';
         // this.primengConfig.translation.emptyFilterMessage = 'Sin filtro';
         // this.primengConfig.translation.emptySearchMessage = 'Sin resultados.';
+
+        
     }
 }
