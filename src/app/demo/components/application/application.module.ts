@@ -37,6 +37,9 @@ import { TabView, TabViewModule } from 'primeng/tabview';
 import { MycommunitiesComponent } from './mycommunities/mycommunities.component';
 import { PanelModule } from 'primeng/panel';
 import { CreatecommunityComponent } from './createcommunity/createcommunity.component';
+import { FieldsetModule } from 'primeng/fieldset';  // <-- Add this line
+import { PasswordModule } from 'primeng/password';  // <-- Add this line
+import { FileUploadModule } from 'primeng/fileupload';  // <-- Add this if using pInputFile or file upload
 
 @NgModule({
   declarations: [
@@ -77,7 +80,10 @@ import { CreatecommunityComponent } from './createcommunity/createcommunity.comp
     InputGroupModule,
     TabViewModule,
     AvatarModule,
-    PanelModule
+    PanelModule,
+    FieldsetModule,  // <-- Add this line for p-fieldset
+    PasswordModule,  // <-- Add this line for p-password
+    FileUploadModule // <-- Add this if you use pInputFile or file input
   ],
   providers: [MessageService, CommunityService, TabView]
 })
