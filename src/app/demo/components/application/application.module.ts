@@ -39,6 +39,9 @@ import { CreatecommunityComponent } from './createcommunity/createcommunity.comp
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ChipsModule } from 'primeng/chips';
+import { FieldsetModule } from 'primeng/fieldset';
+import { PasswordModule } from 'primeng/password';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -82,7 +85,10 @@ import { ChipsModule } from 'primeng/chips';
     InputGroupModule,
     TabViewModule,
     AvatarModule,
-    PanelModule
+    PanelModule,
+    FieldsetModule,  // <-- Add this line for p-fieldset
+    PasswordModule,  // <-- Add this line for p-password
+    FileUploadModule // <-- Add this if you use pInputFile or file input
   ],
   providers: [MessageService, CommunityService, TabView]
 })

@@ -48,47 +48,10 @@
             
                                 </div>
                             </p-fieldset>
-                            <p-fieldset legend="Informacion Comunidad">
-                                <div formArrayName="usuarios" *ngFor="let usuario of usuarios.controls; let i=index">
-                                    <div [formGroupName]="i" class="p-fluid p-formgrid grid">
-                                        <div class="field col-12">
-                                            <label htmlFor="firstname2">Nombre comunidad*</label>
-                                            <input pInputText id="firstname2" type="text" formControlName="nombre" />
-                                        </div>
-                                        <div class="field col-12">
-                                            <label htmlFor="imagep">Imagen de Portada*</label>
-                                            <input type="file" pInputFile id="imagep" formControlName="imagep" />
-                                        </div>
-                                        <div class="field col-6 md:col-6">
-                                            <label htmlFor="firstname2">Contraseña *</label>
-                                            <p-password />
-                                        </div>
-                                      
-                                        <div class="field col-6 md:col-6">
-                                            <label htmlFor="firstname2">Repite Contraseña *</label>
-                                            <p-password />
-                                        </div>
-                                        <div class="field col-12">
-                                            <button type="button" pButton label="Eliminar"
-                                                class="p-button-danger"
-                                                (click)="removeUsuario(i)">Eliminar Comunidad</button>
-                                        </div>
-                                </div>
-                            </div>
-                            <button type="button" pButton icon="pi pi-plus" label="Añadir Comunidad"
-                            class="w-full mt-3" (click)="addUsuario()"></button>
-                            </p-fieldset>
-
-
+                            
                         </div>
 
-                        <p-fieldset legend="Validacion">
-                            <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" (reset)="handleReset()"
-                            (expire)="handleExpire()" (error)="handleError()" (load)="handleLoad()"
-                            (success)="handleSuccess($event)" [useGlobalDomain]="false" [size]="size" [hl]="lang"
-                            [theme]="theme" [type]="type" formControlName="recaptcha">
-                        </ngx-recaptcha2>
-                        </p-fieldset>
+                       
                         <br/>
                         <button pButton pRipple label="Registrarse" class="w-full p-3 text-xl"
                             [disabled]="!registerForm.valid" (click)="doRegister()"></button>
