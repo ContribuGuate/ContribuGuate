@@ -6,6 +6,7 @@ import { CommunitiesComponent } from './communities/communities.component';
 import { CommunityComponent } from './community/community.component';
 import { MycommunitiesComponent } from './mycommunities/mycommunities.component';
 import { CreatecommunityComponent } from './createcommunity/createcommunity.component';
+import { EventsComponent } from './events/events.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'communities/create',
         component: CreatecommunityComponent
+      },
+      {
+        path: 'events',
+        component: EventsComponent
       }
     ]
   }
