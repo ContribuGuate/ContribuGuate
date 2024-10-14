@@ -11,8 +11,8 @@
                     <p-fieldset legend="Información Comunidad">
                         <div class="p-fluid p-formgrid grid">
                             <div class="field col-12">
-                                <label htmlFor="nombreComunidad">Nombre comunidad*</label>
-                                <input pInputText id="nombreComunidad" type="text" formControlName="nombreComunidad" />
+                                <label htmlFor="name">Nombre comunidad*</label>
+                                <input pInputText id="name" type="text" formControlName="name" />
                             </div>
                             <div class="field col-12">
                                 <label htmlFor="imagep">Imagen de Portada*</label>
@@ -26,7 +26,6 @@
                                 <label htmlFor="confirmPassword">Repite Contraseña *</label>
                                 <p-password formControlName="confirmPassword"></p-password>
                             </div>
-                            <!-- Mensaje de error si las contraseñas no coinciden -->
                             <div *ngIf="registerForm.hasError('passwordMismatch')" class="col-12">
                                 <small class="p-error">Las contraseñas no coinciden.</small>
                             </div>

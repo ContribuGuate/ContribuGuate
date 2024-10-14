@@ -14,7 +14,6 @@ export class CreatecommunityComponent {
 
     registerForm: FormGroup;
 
-    // Aquí declaramos la propiedad selectedFile
     selectedFile: File | null = null;
 
     constructor(
@@ -25,13 +24,13 @@ export class CreatecommunityComponent {
         private router: Router
     ) { 
         this.registerForm = this.fb.group({
-            nombreComunidad: ['', Validators.required],
+            name: ['', Validators.required],
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required],
+            description: [''],  
         }, { validators: this.passwordMatchValidator });
     }
 
-    // Validador personalizado para verificar que las contraseñas coinciden
     passwordMatchValidator(formGroup: AbstractControl): { [key: string]: any } | null {
         const password = formGroup.get('password')?.value;
         const confirmPassword = formGroup.get('confirmPassword')?.value;
@@ -41,23 +40,24 @@ export class CreatecommunityComponent {
         return null;
     }
 
-    // Método para manejar la selección del archivo
-    public onFileSelected(event: any) {
+    onFileSelected(event: any) {
         const file: File = event.target.files[0];
         if (file) {
             this.selectedFile = file;
         }
     }
 
-    public doRegister() {
+    doRegister() {
         if (this.registerForm.valid && this.selectedFile) {
             const formValues = this.registerForm.value;
 
             const formData = new FormData();
-            formData.append('nombreComunidad', formValues.nombreComunidad);
+            formData.append('name', formValues.name);  
             formData.append('password', formValues.password);
+            formData.append('description', formValues.description);  
             formData.append('imagep', this.selectedFile, this.selectedFile.name);
 
+            // Ajustar el servicio para llamar al endpoint correcto
             this.communityService.registerCommunity(formData).subscribe(response => {
                 if (response.success) {
                     this.toast.success(response.message, "Registro", { timeOut: 3500 });

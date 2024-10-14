@@ -37,11 +37,11 @@ export class RegisterempComponent {
         private router: Router
     ) {
         this.registerForm = this.fb.group({
-            nombre: ['', Validators.required],
-            descripcion: ['', Validators.required],
+            name: ['', Validators.required],            
+            description: ['', Validators.required],      
             website: ['', Validators.required],
-            contacto: ['', Validators.required],
-            direccion: ['', Validators.required]
+            contact: ['', Validators.required],         
+            address: ['', Validators.required]           
         });
     }
 
@@ -54,12 +54,12 @@ export class RegisterempComponent {
             const formValues = this.registerForm.value;
 
             const formData = new FormData();
-            formData.append('nombre', formValues.nombre);
-            formData.append('descripcion', formValues.descripcion);
+            formData.append('name', formValues.name);
+            formData.append('description', formValues.description);
             formData.append('website', formValues.website);
-            formData.append('contacto', formValues.contacto);
-            formData.append('direccion', formValues.direccion);
-            formData.append('logo', this.selectedFile, this.selectedFile.name);
+            formData.append('contact', formValues.contact);
+            formData.append('address', formValues.address);
+            formData.append('logo', this.selectedFile, this.selectedFile.name); 
 
             this.authService.registerEmp(formData).subscribe((e) => {
                 if (e.success == true) {

@@ -6,40 +6,40 @@
             style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(91, 181, 255, 0) 30%); max-width: 600px; margin: 0 auto;">
             <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
                 <div class="text-center mb-5">
-                    <div class="text-900 text-3xl font-medium mb-3">Registro de Organización</div>
-                    <span class="text-600 font-medium">Completa los datos para registrar a la Asociación en el sistema</span>
+                    <div class="text-900 text-3xl font-medium mb-3">Organization Registration</div>
+                    <span class="text-600 font-medium">Complete the details to register the organization in the system</span>
                 </div>
 
                 <div class="p-fluid p-formgrid grid">
                     <form [formGroup]="registerForm">
                         <div class="col-12">
-                            <p-fieldset legend="Información de la asociación">
+                            <p-fieldset legend="Organization Information">
                                 <div class="p-fluid p-formgrid grid">
                                     <div class="field col-6 md:col-6">
-                                        <label htmlFor="nameorg">Nombre</label>
-                                        <input pInputText id="nameorg" type="text" formControlName="nombre" />
+                                        <label htmlFor="nameorg">Name</label>
+                                        <input pInputText id="nameorg" type="text" formControlName="name" />
                                     </div>
                                     <div class="field col-6 md:col-6">
-                                        <label htmlFor="descripcion">Descripción</label>
-                                        <input pInputText id="descripcion" type="text" formControlName="descripcion" />
+                                        <label htmlFor="description">Description</label>
+                                        <input pInputText id="description" type="text" formControlName="description" />
                                     </div>
                                     
                                     <div class="field col-12">
-                                        <label htmlFor="logo">Logo o Imagen de la Asociación*</label>
+                                        <label htmlFor="logo">Logo or Organization Image*</label>
                                         <input type="file" pInputFile id="logo" (change)="onFileSelected($event)" />
                                     </div>
 
                                     <div class="field col-6 md:col-6">
-                                        <label htmlFor="WebSite">Sitio Web*</label>
-                                        <input pInputText id="WebSite" type="text" formControlName="website" />
+                                        <label htmlFor="website">Website*</label>
+                                        <input pInputText id="website" type="text" formControlName="website" />
                                     </div>
                                     <div class="field col-6 md:col-6">
-                                        <label htmlFor="Contacto">Contacto*</label>
-                                        <input pInputText id="Contacto" type="text" formControlName="contacto" />
+                                        <label htmlFor="contact">Contact*</label>
+                                        <input pInputText id="contact" type="text" formControlName="contact" />
                                     </div>
                                     <div class="field col-6 md:col-6">
-                                        <label htmlFor="Direccion">Dirección*</label>
-                                        <input pInputText id="Direccion" type="text" formControlName="direccion" />
+                                        <label htmlFor="address">Address*</label>
+                                        <input pInputText id="address" type="text" formControlName="address" />
                                     </div>
                                 </div>
                             </p-fieldset>
