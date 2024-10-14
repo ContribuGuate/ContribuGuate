@@ -29,6 +29,7 @@
     "@fullcalendar/timegrid": "^6.0.3",
     "chart.js": "^3.3.2",
     "ngx-captcha": "^13.0.0",
+    "ngx-lazy-load-images": "^2.0.0",
     "ngx-timeago": "^3.0.0",
     "ngx-toastr": "^19.0.0",
     "ngx-ui-loader": "^13.0.0",

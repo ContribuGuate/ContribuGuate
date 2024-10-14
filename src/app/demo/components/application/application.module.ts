@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApplicationRoutingModule } from './application-routing.module';
@@ -15,7 +15,7 @@ import { MessageService } from 'primeng/api';
 import { FeedComponent } from './feed/feed.component';
 import { CommunitiesComponent } from './communities/communities.component';
 import { CardModule } from 'primeng/card';
-
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { TimeagoModule } from 'ngx-timeago';
 import { MenuModule } from 'primeng/menu';
 import { InputMaskModule } from 'primeng/inputmask';
@@ -32,14 +32,16 @@ import { DataViewModule } from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputGroupModule } from 'primeng/inputgroup';
-import { TabMenuModule } from 'primeng/tabmenu';
 import { TabView, TabViewModule } from 'primeng/tabview';
 import { MycommunitiesComponent } from './mycommunities/mycommunities.component';
 import { PanelModule } from 'primeng/panel';
 import { CreatecommunityComponent } from './createcommunity/createcommunity.component';
-import { FieldsetModule } from 'primeng/fieldset';  // <-- Add this line
-import { PasswordModule } from 'primeng/password';  // <-- Add this line
-import { FileUploadModule } from 'primeng/fileupload';  // <-- Add this if using pInputFile or file upload
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { ChipsModule } from 'primeng/chips';
+import { FieldsetModule } from 'primeng/fieldset';
+import { PasswordModule } from 'primeng/password';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,9 @@ import { FileUploadModule } from 'primeng/fileupload';  // <-- Add this if using
     ToastModule,
     CardModule,
     TimeagoModule.forRoot(),
+    OverlayPanelModule,
+    ClipboardModule,
+    InputGroupAddonModule,
     MenuModule,
     InputMaskModule,
     TooltipModule,
