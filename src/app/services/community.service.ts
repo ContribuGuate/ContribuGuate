@@ -38,4 +38,9 @@ export class CommunityService {
     .pipe(map(this.extractData));
   }
 
+  public registerCommunity(formData: FormData) {
+    return this.http.post(environment.baseUrl + 'community/register', formData)
+      .pipe(map(this.extractData));
+  }
+
 }

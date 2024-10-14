@@ -1,45 +1,41 @@
-<div
-            style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(91, 181, 255, 0) 30%); max-width: 600px; margin: 0 auto;">
-            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
-                <div class="text-center mb-5">
-                    <div class="text-900 text-3xl font-medium mb-3">Registro de Comunidad</div>
-                    <span class="text-600 font-medium">Completa los datos para registrar la comunidad en el sistema</span>
-                </div>
-<div class="p-fluid p-formgrid grid">
-    <form [formGroup]="registerForm">
-        <div class="col-12">
-            <p-fieldset legend="Información Comunidad">
-                <div formArrayName="usuarios" *ngFor="let usuario of usuarios.controls; let i=index">
-                    <div [formGroupName]="i" class="p-fluid p-formgrid grid">
-                        <div class="field col-12">
-                            <label htmlFor="firstname2">Nombre comunidad*</label>
-                            <input pInputText id="firstname2" type="text" formControlName="nombre" />
-                        </div>
-                        <div class="field col-12">
-                            <label htmlFor="imagep">Imagen de Portada*</label>
-                            <input type="file" pInputFile id="imagep" formControlName="imagep" />
-                        </div>
-                        <div class="field col-6 md:col-6">
-                            <label htmlFor="firstname2">Contraseña *</label>
-                            <p-password />
-                        </div>
-                        <div class="field col-6 md:col-6">
-                            <label htmlFor="firstname2">Repite Contraseña *</label>
-                            <p-password />
-                        </div>
-                        <div class="field col-12">
-                           
-                        </div>
-                    </div>
-                </div>
-                
-            </p-fieldset>
+<div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(91, 181, 255, 0) 30%); max-width: 600px; margin: 0 auto;">
+    <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+        <div class="text-center mb-5">
+            <div class="text-900 text-3xl font-medium mb-3">Registro de Comunidad</div>
+            <span class="text-600 font-medium">Completa los datos para registrar la comunidad en el sistema</span>
         </div>
 
-       
-        <br/>
-        <button pButton pRipple label="Registrarse" class="w-full p-3 text-xl"
-            [disabled]="!registerForm.valid" (click)="doRegister()"></button>
-    </form>
+        <div class="p-fluid p-formgrid grid">
+            <form [formGroup]="registerForm">
+                <div class="col-12">
+                    <p-fieldset legend="Información Comunidad">
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12">
+                                <label htmlFor="nombreComunidad">Nombre comunidad*</label>
+                                <input pInputText id="nombreComunidad" type="text" formControlName="nombreComunidad" />
+                            </div>
+                            <div class="field col-12">
+                                <label htmlFor="imagep">Imagen de Portada*</label>
+                                <input type="file" pInputFile id="imagep" (change)="onFileSelected($event)" />
+                            </div>
+                            <div class="field col-6 md:col-6">
+                                <label htmlFor="password">Contraseña *</label>
+                                <p-password formControlName="password"></p-password>
+                            </div>
+                            <div class="field col-6 md:col-6">
+                                <label htmlFor="confirmPassword">Repite Contraseña *</label>
+                                <p-password formControlName="confirmPassword"></p-password>
+                            </div>
+                            <!-- Mensaje de error si las contraseñas no coinciden -->
+                            <div *ngIf="registerForm.hasError('passwordMismatch')" class="col-12">
+                                <small class="p-error">Las contraseñas no coinciden.</small>
+                            </div>
+                        </div>
+                    </p-fieldset>
+                </div>
+                <br />
+                <button pButton pRipple label="Registrarse" class="w-full p-3 text-xl" [disabled]="!registerForm.valid || !selectedFile" (click)="doRegister()"></button>
+            </form>
+        </div>
+    </div>
 </div>
-

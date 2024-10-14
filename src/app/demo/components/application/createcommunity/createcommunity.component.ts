@@ -1,154 +1,77 @@
-import { Component,ViewChild, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
-import { ReCaptcha2Component } from "ngx-captcha";
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from "@angular/forms";
 import { LayoutService } from "src/app/layout/service/app.layout.service";
-import { FieldsetModule } from 'primeng/fieldset';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { CommunityService } from 'src/app/services/community.service';
 
 @Component({
   selector: 'app-createcommunity',
   templateUrl: './createcommunity.component.html',
-  styleUrl: './createcommunity.component.scss'
+  styleUrls: ['./createcommunity.component.scss']
 })
 export class CreatecommunityComponent {
-    @ViewChild('captchaElem', { static: false }) captchaElem: ReCaptcha2Component;
-    public captchaIsLoaded = false;
-    public captchaSuccess = false;
-    public captchaIsExpired = false;
-    public captchaResponse?: string;
 
-    public theme: 'light' | 'dark' = 'light';
-    public size: 'compact' | 'normal' = 'normal';
-    public lang = 'es';
-    public type: 'image' | 'audio';
-    public useGlobalDomain: boolean = false;
     registerForm: FormGroup;
-    public readonly siteKey = '6LcvoUgUAAAAAJJbhcXvLn3KgG-pyULLusaU4mL1';
 
-    // Add fechaRegistro property to the class
-    fechaRegistro: Date;
+    // Aquí declaramos la propiedad selectedFile
+    selectedFile: File | null = null;
 
-    constructor(public layoutService: LayoutService, private fb: FormBuilder, private cdr: ChangeDetectorRef) { 
-        // Add fechaRegistro to the form group
+    constructor(
+        public layoutService: LayoutService,
+        private fb: FormBuilder,
+        private communityService: CommunityService,
+        private toast: ToastrService,
+        private router: Router
+    ) { 
         this.registerForm = this.fb.group({
-            email: ['', Validators.required],
-            password: [''],
-            fechaRegistro: [null, Validators.required],  // Add fechaRegistro here
-            usuarios: this.fb.array([this.createUsuario()]), // Add usuarios FormArray here
-            recaptcha: ['', Validators.required]
-        });
-
-        // Initialize fechaRegistro with the current date (optional)
-        this.fechaRegistro = new Date();
+            nombreComunidad: ['', Validators.required],
+            password: ['', Validators.required],
+            confirmPassword: ['', Validators.required],
+        }, { validators: this.passwordMatchValidator });
     }
 
-    // Method to create a FormGroup for a user
-    createUsuario(): FormGroup {
-        return this.fb.group({
-            nombre: ['', Validators.required],
-            correo: ['', [Validators.required, Validators.email]]
-        });
+    // Validador personalizado para verificar que las contraseñas coinciden
+    passwordMatchValidator(formGroup: AbstractControl): { [key: string]: any } | null {
+        const password = formGroup.get('password')?.value;
+        const confirmPassword = formGroup.get('confirmPassword')?.value;
+        if (password !== confirmPassword) {
+            return { 'passwordMismatch': true };
+        }
+        return null;
     }
 
-    // Method to add a new user to the FormArray
-    addUsuario() {
-        this.usuarios.push(this.createUsuario());
-    }
-
-    // Method to remove a user from the FormArray
-    removeUsuario(index: number) {
-        this.usuarios.removeAt(index);
-    }
-
-    // Getter to access the usuarios FormArray
-    get usuarios(): FormArray {
-        return this.registerForm.get('usuarios') as FormArray;
+    // Método para manejar la selección del archivo
+    public onFileSelected(event: any) {
+        const file: File = event.target.files[0];
+        if (file) {
+            this.selectedFile = file;
+        }
     }
 
     public doRegister() {
-        // Perform form submission actions here
-        if (this.registerForm.valid) {
-            console.log(this.registerForm.value);
+        if (this.registerForm.valid && this.selectedFile) {
+            const formValues = this.registerForm.value;
+
+            const formData = new FormData();
+            formData.append('nombreComunidad', formValues.nombreComunidad);
+            formData.append('password', formValues.password);
+            formData.append('imagep', this.selectedFile, this.selectedFile.name);
+
+            this.communityService.registerCommunity(formData).subscribe(response => {
+                if (response.success) {
+                    this.toast.success(response.message, "Registro", { timeOut: 3500 });
+                    this.router.navigate(['/app/feed']);
+                } else {
+                    this.toast.error(response.message, "Registro", { timeOut: 3500 });
+                }
+            }, error => {
+                this.toast.error("Error al registrar la comunidad", "Registro", { timeOut: 3500 });
+            });
         } else {
-            console.log("Form is invalid");
+            this.toast.error("Por favor, completa todos los campos requeridos y selecciona un archivo.", "Error de validación", {
+                timeOut: 3500
+            });
         }
     }
-
-    handleReset(): void {
-        this.captchaSuccess = false;
-        this.captchaResponse = undefined;
-        this.captchaIsExpired = false;
-        this.cdr.detectChanges();
-    }
-    
-    handleSuccess(captchaResponse: string): void {
-        this.captchaSuccess = true;
-        this.captchaResponse = captchaResponse;
-        this.captchaIsExpired = false;
-        this.cdr.detectChanges();
-    }
-    
-    handleLoad(): void {
-        this.captchaIsLoaded = true;
-        this.captchaIsExpired = false;
-        this.cdr.detectChanges();
-    }
-    
-    handleExpire(): void {
-        this.captchaSuccess = false;
-        this.captchaIsExpired = true;
-        this.cdr.detectChanges();
-    }
-
-    handleError(): void {
-        this.captchaSuccess = false;
-        this.captchaIsExpired = true;
-        this.cdr.detectChanges();
-    }
-
-    changeTheme(theme: 'light' | 'dark'): void {
-        this.theme = theme;
-    }
-
-    changeSize(size: 'compact' | 'normal'): void {
-        this.size = size;
-    }
-
-    changeType(type: 'image' | 'audio'): void {
-        this.type = type;
-    }
-
-    setUseGlobalDomain(use: boolean): void {
-        this.useGlobalDomain = use;
-    }
-
-    getCurrentResponse(): void {
-        const currentResponse = this.captchaElem.getCurrentResponse();
-        if (!currentResponse) {
-            alert('There is no current response - have you submitted captcha?');
-        } else {
-            alert(currentResponse);
-        }
-    }
-
-    getResponse(): void {
-        const response = this.captchaElem.getResponse();
-        if (!response) {
-            alert('There is no response - have you submitted captcha?');
-        } else {
-            alert(response);
-        }
-    }
-
-    reload(): void {
-        this.captchaElem.reloadCaptcha();
-    }
-
-    getCaptchaId(): void {
-        alert(this.captchaElem.getCaptchaId());
-    }
-
-    reset(): void {
-        this.captchaElem.resetCaptcha();
-    }
-
 }
