@@ -61,6 +61,13 @@ export class AppNavbarComponent {
             icon: 'pi pi-heart',
             items: [
                 {
+                    label: 'Eventos', 
+                    icon: 'pi pi-calendar',
+                    command: () => {
+                        this.router.navigate(['/app/events']);
+                    }
+                },
+                {
                     label: 'Historial de participacion',
                     icon: 'pi pi-history'
                 },

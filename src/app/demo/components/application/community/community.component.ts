@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommunityService } from 'src/app/services/community.service';
 import { environment } from 'src/environments/environment';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-community',
@@ -13,7 +14,7 @@ export class CommunityComponent {
   public logosEndpoint = environment.baseUrl + 'community/logo/'
   public organization: any = ''
   public communityObj: any = {}
-
+  public inviteLink: string = 'https://test.com/invite/abcdefg';
   posts = [
     {
       title: 'Tree Planting',
@@ -30,7 +31,7 @@ export class CommunityComponent {
     // Otros posts...
   ];
   constructor(private route: ActivatedRoute, private community: CommunityService, private toast: ToastrService,
-    private router: Router
+    private router: Router, private clipboard: Clipboard
   ) {
     this.route.paramMap.subscribe( paramMap => {
       this.organization = paramMap.get('id');
@@ -50,5 +51,19 @@ export class CommunityComponent {
 
   public getUserLabel(user){
     return user.firstname.charAt(0) + user.surname.charAt(0);
+  }
+
+  public copyInviteLink(){
+    try{
+      this.clipboard.copy(this.inviteLink);
+      this.toast.success("Enlace de invitación copiado", "Comunidades", {
+        timeOut: 4500
+      })
+    }catch(err){
+      this.toast.error("El enlace de invitación no se pudo copiar", "Comunidades", {
+        timeOut: 4800
+      })
+    }
+    
   }
 }
