@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { LayoutService } from "src/app/layout/service/app.layout.service";
 
 @Component({
     selector: 'app-forgot',
@@ -15,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class ForgotComponent{
     public forgotForm: FormGroup;
-    constructor(private fb: FormBuilder){
+    constructor(private fb: FormBuilder, public layoutService: LayoutService){
         this.forgotForm = this.fb.group({
             email: ['', Validators.required]
         })

@@ -13,25 +13,28 @@ import { AvatarModule } from 'primeng/avatar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { AppConfigModule } from "../../../layout/config/config.module";
+import { AppConfigComponent } from 'src/app/layout/config/app.config.component';
 
 @NgModule({
     imports: [
-        CommonModule,
-        LandingRoutingModule,
-        DividerModule,
-        StyleClassModule,
-        FormsModule,
-        ReactiveFormsModule,
-        ChartModule,
-        PanelModule,
-        ButtonModule,
-        DialogModule,
-        InputTextModule,
-        InputMaskModule,
-        AvatarModule,
-        ScrollTopModule,
-        InputMaskModule
-    ],
+    CommonModule,
+    LandingRoutingModule,
+    DividerModule,
+    StyleClassModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ChartModule,
+    PanelModule,
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    InputMaskModule,
+    AvatarModule,
+    ScrollTopModule,
+    InputMaskModule,
+    AppConfigModule
+],
     declarations: [LandingComponent]
 })
 export class LandingModule { }

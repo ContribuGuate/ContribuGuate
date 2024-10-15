@@ -23,7 +23,7 @@ import { ConfirmationService } from 'primeng/api';
     declarations: [AppComponent, NotfoundComponent],
     imports: [AppRoutingModule, AppLayoutModule, 
         NgxUiLoaderModule.forRoot({
-            fgsType: "pulse",
+            fgsType: "folding-cube",
             fgsColor: "#03a9f4",
             fgsSize: 70,
             hasProgressBar: true,

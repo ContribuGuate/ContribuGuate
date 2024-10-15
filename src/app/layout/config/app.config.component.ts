@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { LayoutService } from '../service/app.layout.service';
 import { MenuService } from '../app.menu.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector: 'app-config',
@@ -8,13 +9,28 @@ import { MenuService } from '../app.menu.service';
 })
 export class AppConfigComponent {
     @Input() minimal: boolean = false;
-
+    public darkMode: boolean = localStorage.getItem('system.Theme') == 'light' ? true : false;
+    #document = inject(DOCUMENT);
     scales: number[] = [12, 13, 14, 15, 16];
 
     constructor(
         public layoutService: LayoutService,
         public menuService: MenuService
     ) {}
+
+    public onToggleDarkMode(): void {
+        this.darkMode = !this.darkMode;
+        const linkElem = this.#document.getElementById('theme-css') as HTMLLinkElement;
+        if(this.darkMode == true){
+          linkElem.href = 'assets/layout/styles/theme/md-dark-indigo/theme.css'
+          this.layoutService.config.update((config) => ({ ...config, colorScheme: 'dark' }));
+          localStorage.setItem('system.Theme', 'dark');
+        }else{
+          linkElem.href = 'assets/layout/styles/theme/md-light-indigo/theme.css'
+          this.layoutService.config.update((config) => ({ ...config, colorScheme: 'light' }));
+          localStorage.setItem('system.Theme', 'light');
+        }
+      }
 
     get visible(): boolean {
         return this.layoutService.state.configSidebarVisible;

@@ -2,7 +2,7 @@
   <ng-template pTemplate="start">
     <a class="flex align-items-center">
       <img
-        src="../../../../assets/layout/images/logo outline.png"
+        src="../../../../assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo outline' : 'logo'}}.png"
         alt="ContribuGuate"
         height="75"
         class="mr-0 lg:mr-2"

@@ -27,7 +27,7 @@ export class LayoutService {
         ripple: false,
         inputStyle: 'outlined',
         menuMode: 'static',
-        colorScheme: 'light',
+        colorScheme: localStorage.getItem('system.Theme') ?? 'light',
         theme: 'lara-light-indigo',
         scale: 14,
     };

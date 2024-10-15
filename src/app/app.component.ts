@@ -9,13 +9,6 @@ import { PrimeNGConfig } from 'primeng/api';
 export class AppComponent implements OnInit {
     #document = inject(DOCUMENT);
     constructor(private primengConfig: PrimeNGConfig) {
-        const linkElem = this.#document.getElementById('theme-css') as HTMLLinkElement;
-        const store = localStorage.getItem('system.Theme') ?? 'dark';
-        if(store == 'light'){
-          linkElem.href = 'assets/layout/styles/theme/md-dark-indigo/theme.css'
-        }else if(store == 'dark'){
-          linkElem.href = 'assets/layout/styles/theme/md-light-indigo/theme.css'
-        }
      }
     
     ngOnInit() {
