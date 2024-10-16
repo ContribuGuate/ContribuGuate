@@ -42,6 +42,9 @@ import { ChipsModule } from 'primeng/chips';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PasswordModule } from 'primeng/password';
 import { FileUploadModule } from 'primeng/fileupload';
+import { OrganizationsComponent } from './organizations/organizations.component';
+import { OrganizationService } from 'src/app/services/organization.service';
+import { CreateorganizationComponent } from './createorganization/createorganization.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { FileUploadModule } from 'primeng/fileupload';
     AppNavbarComponent,
     CommunityComponent,
     MycommunitiesComponent,
-    CreatecommunityComponent
+    CreatecommunityComponent,
+    OrganizationsComponent,
+    CreateorganizationComponent
   ],
   imports: [
     CommonModule,
@@ -90,6 +95,6 @@ import { FileUploadModule } from 'primeng/fileupload';
     PasswordModule,  // <-- Add this line for p-password
     FileUploadModule // <-- Add this if you use pInputFile or file input
   ],
-  providers: [MessageService, CommunityService, TabView]
+  providers: [MessageService, CommunityService, TabView, OrganizationService]
 })
 export class ApplicationModule { }

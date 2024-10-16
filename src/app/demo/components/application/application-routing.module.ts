@@ -7,6 +7,8 @@ import { CommunityComponent } from './community/community.component';
 import { MycommunitiesComponent } from './mycommunities/mycommunities.component';
 import { CreatecommunityComponent } from './createcommunity/createcommunity.component';
 import { EventsComponent } from './events/events.component';
+import { OrganizationsComponent } from './organizations/organizations.component';
+import { CreateorganizationComponent } from './createorganization/createorganization.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,14 @@ const routes: Routes = [
       {
         path: 'events',
         component: EventsComponent
+      },
+      {
+        path: 'organizations',
+        component: OrganizationsComponent
+      },
+      {
+        path: 'organizations/create',
+        component: CreateorganizationComponent
       }
     ]
   }

@@ -2,6 +2,7 @@ import { DOCUMENT } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { LayoutService } from "src/app/layout/service/app.layout.service";
 
 @Component({
     selector: 'app-auth-navbar',
@@ -21,6 +22,26 @@ export class AppNavbarComponent {
             command: () => {
                 this.router.navigate(['/app/feed']);
             }
+        },
+        {
+            label: 'Organizaciones',
+            icon: 'pi pi-sitemap',
+            items: [
+                {
+                    label: 'Explorar',
+                    icon: 'pi pi-map',
+                    command: () => {
+                        this.router.navigate(['/app/organizations']);
+                    }
+                },
+                {
+                    label: 'Crear una',
+                    icon: 'pi pi-plus',
+                    command: () => {
+                        this.router.navigate(['/app/organizations/create']);
+                    }
+                }
+            ]
         },
         {
             label: 'Comunidades',
@@ -99,7 +120,7 @@ export class AppNavbarComponent {
             ]
         }
     ]
-    constructor(private router: Router, private fb: FormBuilder) {
+    constructor(private router: Router, private fb: FormBuilder, public layoutService: LayoutService) {
         this.joinCommunityForm = this.fb.group({
             code: ['', Validators.required]
         })

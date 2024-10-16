@@ -66,4 +66,8 @@ export class CommunityComponent {
     }
     
   }
+
+  public donate(){
+    
+  }
 }

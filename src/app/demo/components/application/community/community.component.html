@@ -1,9 +1,9 @@
 <!-- organization.component.html -->
-<div class="p-grid p-nogutter organization-container" *ngIf="communityObj">
+<div class="p-grid p-nogutter organization-container" *ngIf="communityObj && communityObj.organization">
   <div class="p-col-12 p-md-4 p-lg-3 organization-info">
     <div class="organization-header">
-      <img [src]="logosEndpoint + organization" alt="Organization Logo" class="organization-logo" />
-      <h2>{{communityObj.name}}</h2>
+      <img [src]="communityObj.coverImage" alt="Organization Logo" class="organization-logo" />
+      <h2>{{communityObj.organization.name }} : {{communityObj.name}}</h2>
       <p>{{communityObj.description}}</p>
       <!-- <p><strong>Contact:</strong> contactorganization.org</p> -->
       <p-tabView *ngIf="communityObj.organization">
@@ -30,7 +30,13 @@
         </p-tabPanel>
 
         <p-tabPanel header="Miembros" *ngIf="communityObj.communityMemberships">
-          <p-dataView #dv [value]="communityObj.communityMemberships">
+          <p-dataView #dv [value]="communityObj.communityMemberships" [rows]="5" [paginator]="true">
+            <ng-template pTemplate="empty">
+              <div class="flex align-items-center justify-content-center p-4">
+                <i class="pi pi-inbox p-mr-3"></i>
+                <span class="p-ml-2">&nbsp;No hay miembros registrados</span>
+              </div>
+            </ng-template>
             <ng-template pTemplate="list" let-products>
               <div class="grid grid-nogutter">
                 <div class="col-12" *ngFor="let item of products; let first = first" class="col-12">
@@ -59,6 +65,7 @@
               </div>
             </ng-template>
           </p-dataView>
+          <br/>
           <p-button (onClick)="op.toggle($event)" icon="pi pi-share-alt" label="Invitar" />
           <p-overlayPanel #op>
             <div class="flex flex-column gap-3 w-25rem">
@@ -96,7 +103,7 @@
         </p-tabPanel>
 
         <p-tabPanel header="Donación" *ngIf="communityObj.donationLink">
-          <p-button label="Donar a la organización" icon="pi pi-credit-card" iconPos="right" />
+          <p-button (click)="donate()" label="Donar a la organización" icon="pi pi-credit-card" iconPos="right" />
         </p-tabPanel>
 
       </p-tabView>
@@ -104,7 +111,7 @@
 
   </div>
 
-  <div class="p-col-12 p-md-8 p-lg-9">
+  <!-- <div class="p-col-12 p-md-8 p-lg-9">
 
     <div class="recent-publications" *ngIf="communityObj.public">
       <h2>Publicaciones recientes</h2>
@@ -121,5 +128,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
