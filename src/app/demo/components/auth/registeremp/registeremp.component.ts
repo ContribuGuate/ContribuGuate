@@ -49,34 +49,5 @@ export class RegisterempComponent {
         this.selectedFile = event.target.files[0] as File;
     }
 
-    public doRegister() {
-        if (this.registerForm.valid && this.selectedFile) {
-            const formValues = this.registerForm.value;
-
-            const formData = new FormData();
-            formData.append('name', formValues.name);
-            formData.append('description', formValues.description);
-            formData.append('website', formValues.website);
-            formData.append('contact', formValues.contact);
-            formData.append('address', formValues.address);
-            formData.append('logo', this.selectedFile, this.selectedFile.name); 
-
-            this.authService.registerEmp(formData).subscribe((e) => {
-                if (e.success == true) {
-                    this.toast.success(e.message, "Autenticación", {
-                        timeOut: 3500
-                    });
-                    this.router.navigate(['/app/feed']);
-                } else {
-                    this.toast.error(e.message, "Autenticación", {
-                        timeOut: 3500
-                    });
-                }
-            });
-        } else {
-            this.toast.error("Por favor, completa todos los campos requeridos y selecciona un archivo.", "Error de validación", {
-                timeOut: 3500
-            });
-        }
-    }
+   
 }

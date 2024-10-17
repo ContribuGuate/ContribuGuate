@@ -1,1 +1,53 @@
-<p>createorganization works!</p>
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div
+            style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(91, 181, 255, 0) 30%); max-width: 600px; margin: 0 auto;">
+            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                <div class="text-center mb-5">
+                    <div class="text-900 text-3xl font-medium mb-3">Registra una Organizacion</div>
+                    <span class="text-600 font-medium">Complete los campos para registrar una organizacion</span>
+                </div>
+
+                <div class="p-fluid p-formgrid grid">
+                    <form [formGroup]="registerForm">
+                        <div class="col-12">
+                            <p-fieldset legend="Organization Information">
+                                <div class="p-fluid p-formgrid grid">
+                                    <div class="field col-12">
+                                        <label htmlFor="nameorg">Nombre de la Organizacion</label>
+                                        <input pInputText id="nameorg" type="text" formControlName="name" />
+                                    </div>
+                                    <div class="field col-12">
+                                        <label htmlFor="description">Descripcion</label>
+                                        <input pInputText id="description" type="text" formControlName="description" />
+                                    </div>
+                                    
+                                    <div class="field col-6 md:col-6">
+                                        <label htmlFor="image">Logo de la Organizacion Image URL*</label>
+                                        <input pInputText id="image" type="text" formControlName="image" />
+                                    </div>
+
+                                    <div class="field col-6 md:col-6">
+                                        <label htmlFor="website">Website*</label>
+                                        <input pInputText id="website" type="text" formControlName="website" />
+                                    </div>
+                                    <div class="field col-6 md:col-6">
+                                        <label htmlFor="contact">Contacto*</label>
+                                        <input pInputText id="contact" type="text" formControlName="contact" />
+                                    </div>
+                                    <div class="field col-6 md:col-6">
+                                        <label htmlFor="address">Direccion*</label>
+                                        <input pInputText id="address" type="text" formControlName="address" />
+                                    </div>
+                                </div>
+                            </p-fieldset>
+                        </div>
+                        <br/>
+                        <button pButton pRipple label="Registrarse" class="w-full p-3 text-xl"
+                            [disabled]="!registerForm.valid" (click)="doRegister()"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
