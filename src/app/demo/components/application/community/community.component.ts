@@ -68,6 +68,10 @@ export class CommunityComponent {
   }
 
   public donate(){
-    
+
+  }
+
+  public isAdmin(){
+    return this.communityObj.communityMemberships?.some((m) => m.is_admin === true)
   }
 }
