@@ -1,3 +1,4 @@
+import { CalendarModule } from 'primeng/calendar';
 import { Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -45,6 +46,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { OrganizationsComponent } from './organizations/organizations.component';
 import { OrganizationService } from 'src/app/services/organization.service';
 import { CreateorganizationComponent } from './createorganization/createorganization.component';
+import { EventsComponent } from './events/events.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,8 @@ import { CreateorganizationComponent } from './createorganization/createorganiza
     MycommunitiesComponent,
     CreatecommunityComponent,
     OrganizationsComponent,
-    CreateorganizationComponent
+    CreateorganizationComponent,
+    EventsComponent
   ],
   imports: [
     CommonModule,
@@ -86,6 +90,7 @@ import { CreateorganizationComponent } from './createorganization/createorganiza
     DataViewModule,
     TagModule,
     InputSwitchModule,
+    FullCalendarModule,
     FormsModule,
     InputGroupModule,
     TabViewModule,

@@ -33,7 +33,7 @@ export class CreateorganizationComponent {
           description: ['', Validators.required],      
           website: ['', Validators.required],
           contact: ['', Validators.required],         
-          address: ['', Validators.required],
+          address: [''],
           image: ['', [Validators.required, Validators.pattern(/https?:\/\/.+\.(jpg|jpeg|png|gif|svg)$/i)]]
       });
   }
@@ -45,12 +45,12 @@ export class CreateorganizationComponent {
 
         this.OrganizationService.registerEmp(formValues).subscribe((e) => {
             if (e.success == true) {
-                this.toast.success(e.message, "Autenticación", {
+                this.toast.success(e.message, "Organizaciones", {
                     timeOut: 3500
                 });
                 this.router.navigate(['/app/feed']);
             } else {
-                this.toast.error(e.message, "Autenticación", {
+                this.toast.error(e.message, "Organizaciones", {
                     timeOut: 3500
                 });
             }
