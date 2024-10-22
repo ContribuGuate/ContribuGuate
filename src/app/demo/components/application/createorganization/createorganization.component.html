@@ -51,3 +51,29 @@
         </div>
     </div>
 </div>
+
+
+
+<p-dialog 
+        *ngIf="organizationObj != null"
+        header="Registro de organizacion" 
+        [modal]="true"
+        [(visible)]="registerOrganization" 
+        [position]="'center'" 
+        draggable="false"
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
+    [style]="{ width: '25vw' }" 
+    [draggable]="false" 
+    [resizable]="false">
+            <span class="p-text-secondary block mb-5">
+                Informacion importante
+            </span>
+            <div class="flex align-items-center gap-3 mb-3">
+                <p>Tu organizacion fue enviada para revision de los administradores por lo cual es posible que no la veas en el sistema. <br/>
+                    Puedes dar seguimiento de tu solicitud (puede tardar de 24 a 48 horas)</p>
+            </div>
+            <div class="flex justify-content-end gap-2">
+                <p-button label="Trackear" routerLink="/app/organization/tracking/{{organizationObj.uuid}}" icon="pi pi-list" severity="info"/>
+                <p-button label="Aceptar" (onClick)="exitOrganization()" icon="pi pi-check"  severity="success" iconPos="right"/>
+            </div>
+    </p-dialog>

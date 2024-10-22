@@ -3,6 +3,7 @@ import { Component, inject } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LayoutService } from "src/app/layout/service/app.layout.service";
+import { CommunityService } from "src/app/services/community.service";
 
 @Component({
     selector: 'app-auth-navbar',
@@ -12,7 +13,9 @@ export class AppNavbarComponent {
     public joinCommunityVisible: boolean = false;
     public joinCommunityForm: FormGroup;
     public preferencesDialog: boolean = false;
+    public communityDialog: boolean = false;
     public darkMode: boolean = false;
+    public communityToJoin: any = null;
   
     #document = inject(DOCUMENT);
     items = [
@@ -120,9 +123,11 @@ export class AppNavbarComponent {
             ]
         }
     ]
-    constructor(private router: Router, private fb: FormBuilder, public layoutService: LayoutService) {
+    constructor(private router: Router, private fb: FormBuilder, public layoutService: LayoutService,
+        private communityService: CommunityService
+    ) {
         this.joinCommunityForm = this.fb.group({
-            code: ['', Validators.required]
+            code: ['', Validators.compose([Validators.required, Validators.minLength(12), Validators.maxLength(12)])]
         })
      }
 
@@ -137,5 +142,21 @@ export class AppNavbarComponent {
           linkElem.href = 'assets/layout/styles/theme/md-light-indigo/theme.css'
           localStorage.setItem('system.Theme', 'light');
         }
+      }
+
+
+      public joinWithCode(){
+        this.communityService.getByCode(this.joinCommunityForm.controls['code'].value)
+        .subscribe((e) => {
+            if(e.success == true){
+                this.communityDialog = true;
+                this.joinCommunityVisible = false;
+                this.joinCommunityForm.reset()
+                this.communityToJoin = e.community;
+            }else{
+                this.communityDialog = false;
+                this.joinCommunityForm.reset();
+            }
+        })
       }
 }

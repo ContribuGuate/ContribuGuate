@@ -17,6 +17,8 @@ export class CreateorganizationComponent {
   public lang = 'es';
   public type: 'image' | 'audio';
   public useGlobalDomain: boolean = false;
+  public registerOrganization: boolean = true;
+  public organizationObj: any = null;
   registerForm: FormGroup;
   public readonly siteKey = '6LcvoUgUAAAAAJJbhcXvLn3KgG-pyULLusaU4mL1';
 
@@ -38,6 +40,12 @@ export class CreateorganizationComponent {
       });
   }
 
+  public exitOrganization(){
+    this.registerOrganization = false;
+    this.organizationObj = null;
+    this.router.navigate(['/app/organizations'])
+  }
+
 
   public doRegister() {
     if (this.registerForm.valid) {
@@ -48,7 +56,10 @@ export class CreateorganizationComponent {
                 this.toast.success(e.message, "Organizaciones", {
                     timeOut: 3500
                 });
-                this.router.navigate(['/app/feed']);
+                this.organizationObj = e.organization;
+                this.registerOrganization = true;
+                this.registerForm.reset();
+                // this.router.navigate(['/app/feed']);
             } else {
                 this.toast.error(e.message, "Organizaciones", {
                     timeOut: 3500
@@ -61,6 +72,7 @@ export class CreateorganizationComponent {
         });
     }
 }
+
 
 
 }

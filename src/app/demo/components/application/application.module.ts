@@ -39,7 +39,6 @@ import { PanelModule } from 'primeng/panel';
 import { CreatecommunityComponent } from './createcommunity/createcommunity.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { ChipsModule } from 'primeng/chips';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PasswordModule } from 'primeng/password';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -48,6 +47,8 @@ import { OrganizationService } from 'src/app/services/organization.service';
 import { CreateorganizationComponent } from './createorganization/createorganization.component';
 import { EventsComponent } from './events/events.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { TimelineModule } from 'primeng/timeline';
+import { TrackorganizationComponent } from './trackorganization/trackorganization.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     CreatecommunityComponent,
     OrganizationsComponent,
     CreateorganizationComponent,
-    EventsComponent
+    EventsComponent,
+    TrackorganizationComponent
   ],
   imports: [
     CommonModule,
@@ -96,6 +98,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     TabViewModule,
     AvatarModule,
     PanelModule,
+    TimelineModule,
     FieldsetModule,  // <-- Add this line for p-fieldset
     PasswordModule,  // <-- Add this line for p-password
     FileUploadModule // <-- Add this if you use pInputFile or file input

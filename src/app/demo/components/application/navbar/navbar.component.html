@@ -3,96 +3,77 @@
     <a class="flex align-items-center">
       <img
         src="../../../../assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo outline' : 'logo'}}.png"
-        alt="ContribuGuate"
-        height="75"
-        class="mr-0 lg:mr-2"
-      /><span class="text-900 font-medium text-2xl line-height-3 mr-8"
-        >ContribuGuate</span
-      >
+        alt="ContribuGuate" height="75" class="mr-0 lg:mr-2" /><span
+        class="text-900 font-medium text-2xl line-height-3 mr-8">ContribuGuate</span>
     </a>
   </ng-template>
   <ng-template pTemplate="item" let-item let-root="root">
     <a pRipple class="flex align-items-center p-menuitem-link">
       <span [class]="item.icon"></span>
       <span class="ml-2">{{ item.label }}</span>
-      <p-badge
-        *ngIf="item.badge"
-        [ngClass]="{ 'ml-auto': !root, 'ml-2': root }"
-        [value]="item.badge"
-      />
-      <span
-        *ngIf="item.shortcut"
-        class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1"
-        >{{ item.shortcut }}</span
-      >
-      <i
-        *ngIf="item.items"
-        [ngClass]="[
+      <p-badge *ngIf="item.badge" [ngClass]="{ 'ml-auto': !root, 'ml-2': root }" [value]="item.badge" />
+      <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{
+        item.shortcut }}</span>
+      <i *ngIf="item.items" [ngClass]="[
           'pi',
           root ? 'pi-angle-down ml-2' : 'pi-angle-right ml-auto'
-        ]"
-      ></i>
+        ]"></i>
     </a>
   </ng-template>
 </p-menubar>
 
-<p-dialog
-  header="Unirse a una comunidad"
-  [modal]="true"
-  [(visible)]="joinCommunityVisible"
-  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
-  [style]="{ width: '20vw' }"
->
+<p-dialog header="Unirse a una comunidad" [modal]="true" [(visible)]="joinCommunityVisible"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '20vw' }">
   <span class="p-text-secondary block mb-5">Ingresa el codigo de acceso</span>
   <form [formGroup]="joinCommunityForm">
     <div class="flex align-items-center gap-3 mb-3">
-      <label for="code" class="font-semibold w-6rem">Codigo</label>
-      <p-inputMask
-        formControlName="code"
-        mask="99-999999"
-        formControlName="value"
-        placeholder="99-999999"
-      />
+      <div class="flex flex-column gap-2">
+        <label for="code">Codigo de comunidad</label>
+        <input 
+            pInputText 
+            id="code" 
+            aria-describedby="username-help" 
+            formControlName="code" />
+        <small id="username-help">
+            El codigo que te compartieron debe contener 12 caracteres
+        </small>
+    </div>
     </div>
     <div class="flex justify-content-end gap-2">
-      <p-button
-        label="Cancelar"
-        severity="secondary"
-        (onClick)="joinCommunityVisible = false"
-      />
-      <p-button
-        label="Unirse"
-        [disabled]="!joinCommunityForm.valid"
-        (onClick)="joinCommunityVisible = false"
-      />
+      <p-button label="Cancelar" severity="secondary" (onClick)="joinCommunityVisible = false" />
+      <p-button label="Unirse" [disabled]="!joinCommunityForm.valid" (onClick)="joinWithCode()" />
     </div>
   </form>
 </p-dialog>
 
-<p-dialog
-  header="Preferencias del sistema"
-  [modal]="true"
-  [(visible)]="preferencesDialog"
-  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
-  [style]="{ width: '25vw' }"
->
-  <span class="p-text-secondary block mb-5"
-    >Ajusta las configuraciones segun tus necesidades</span
-  >
+<p-dialog header="Preferencias del sistema" [modal]="true" [(visible)]="preferencesDialog"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '25vw' }">
+  <span class="p-text-secondary block mb-5">Ajusta las configuraciones segun tus necesidades</span>
   <div class="flex align-items-center gap-3 mb-3">
     <label for="darkMode" class="font-semibold w-6rem">Modo oscuro</label>
-    <p-inputSwitch
-      id="darkMode"
-      [ngModel]="darkMode"
-      (ngModelChange)="onToggleDarkMode()"
-    />
+    <p-inputSwitch id="darkMode" [ngModel]="darkMode" (ngModelChange)="onToggleDarkMode()" />
   </div>
   <div class="flex justify-content-end gap-2">
-    <p-button
-      label="Cancelar"
-      severity="secondary"
-      (onClick)="preferencesDialog = false"
-    />
+    <p-button label="Cancelar" severity="secondary" (onClick)="preferencesDialog = false" />
     <p-button label="Guardar" (onClick)="preferencesDialog = false" />
+  </div>
+</p-dialog>
+
+<p-dialog header="Unirse a una comunidad" [modal]="true" [(visible)]="communityDialog"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }" *ngIf="communityToJoin">
+  <div class="flex align-items-center gap-3 mb-3">
+    <p-card [header]="communityToJoin.organization.name" [subheader]="communityToJoin.name" [style]="{ width: '360px' }">
+      <ng-template pTemplate="header">
+          <img alt="Card" [src]="communityToJoin.coverImage" />
+      </ng-template>
+      <p>
+        {{communityToJoin.description}}
+      </p>
+  </p-card>
+  
+  </div>
+  <div class="flex justify-content-end gap-2">
+    <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (click)="communityDialog = false; communityToJoin =null" />
+    <p-button label="Unirse" icon="pi pi-link" iconPos="right"  />
   </div>
 </p-dialog>
