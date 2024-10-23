@@ -54,6 +54,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { EventService } from 'src/app/services/event.service';
+import { AppConfigModule } from 'src/app/layout/config/config.module';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { EventService } from 'src/app/services/event.service';
   imports: [
     CommonModule,
     ApplicationRoutingModule,
+    AppConfigModule,
     StyleClassModule,
     ButtonModule,
     DividerModule,

@@ -1,3 +1,4 @@
+<app-config></app-config>
 <p-menubar [model]="items">
   <ng-template pTemplate="start">
     <a class="flex align-items-center">
@@ -75,5 +76,45 @@
   <div class="flex justify-content-end gap-2">
     <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (click)="communityDialog = false; communityToJoin =null" />
     <p-button label="Unirse" icon="pi pi-link" iconPos="right"  />
+  </div>
+</p-dialog>
+
+<p-dialog header="Información personal" [modal]="true" [(visible)]="personalInfo"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }" 
+  [draggable]="false" [resizable]="false" [closable]="true" *ngIf="personalInfoObj">
+  
+  <div class="flex flex-column align-items-center gap-3 mb-3">
+    <!-- Imagen del perfil del usuario -->
+    <img src="../../../../../assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo outline' : 'logo'}}.png" 
+         alt="Imagen de perfil" 
+         style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" />
+
+    <!-- Nombre de usuario e ícono de verificado si está verificado -->
+    <div class="flex align-items-center">
+      <h3 class="m-0">{{ personalInfoObj.person.firstname }} 
+        {{ personalInfoObj.person.secondname ? personalInfoObj.person.secondname : '' }} 
+        {{ personalInfoObj.person.surname }} 
+        {{ personalInfoObj.person.secondsurname ? personalInfoObj.person.secondsurname : '' }}</h3>
+      <i *ngIf="personalInfoObj.person.verified" 
+         class="pi pi-verified" 
+         style="font-size: 1.1rem; color: rgb(0, 119, 255); margin-left: 0.5rem;" 
+         title="Usuario verificado"></i>
+
+         
+    </div>
+
+    <p>Usuario: {{ '@' + personalInfoObj.username }}</p>
+
+    <!-- Correo electrónico -->
+    <p>Email: {{ personalInfoObj.email }}</p>
+
+    <!-- Teléfono (solo si está presente) -->
+    <p *ngIf="personalInfoObj.person.phone">Teléfono: {{ personalInfoObj.person.phone }}</p>
+
+    <!-- Estado de la cuenta -->
+    <!-- <p *ngIf="personalInfoObj.active; else inactiveTemplate">Estado: Activa</p>
+    <ng-template #inactiveTemplate>
+      <p>Estado: Inactiva</p>
+    </ng-template> -->
   </div>
 </p-dialog>
