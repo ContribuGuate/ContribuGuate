@@ -1,4 +1,5 @@
-<div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(91, 181, 255, 0) 30%); max-width: 600px; margin: 0 auto;">
+<div
+    style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(91, 181, 255, 0) 30%); max-width: 600px; margin: 0 auto;">
     <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
         <div class="text-center mb-5">
             <div class="text-900 text-3xl font-medium mb-3">Registro de Comunidad</div>
@@ -10,21 +11,52 @@
                 <div class="col-12">
                     <p-fieldset legend="Información Comunidad">
                         <div class="p-fluid p-formgrid grid">
+                            <div class="col-12">
+                                <label for="organization">Organización*</label>
+                                <p-dropdown id="organization" [options]="organizations" formControlName="organization" optionLabel="name"
+                                    [showClear]="true" placeholder="Selecciona una organización">
+                                    <ng-template pTemplate="selectedItem" >
+                                        <div class="flex align-items-center gap-2" *ngIf="registerForm.get('organization')?.value">
+                                            <img [src]="registerForm.get('organization')?.value.image"
+                                                style="width: 18px" />
+                                            <div>{{ registerForm.get('organization')?.value.name }}</div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="flex align-items-center gap-2">
+                                            <img [src]="country.image"
+                                                style="width: 18px" />
+                                            <div>{{ country.name }}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+
+                            </div>
                             <div class="field col-12">
-                                <label htmlFor="name">Nombre comunidad*</label>
+                                <label for="name">Nombre comunidad*</label>
                                 <input pInputText id="name" type="text" formControlName="name" />
                             </div>
                             <div class="field col-12">
-                                <label htmlFor="imagep">Imagen de Portada*</label>
-                                <input type="file" pInputFile id="imagep" (change)="onFileSelected($event)" />
+                                <label for="descp">Descripción</label>
+                                <textarea id="descp" formControlName="description" rows="2" cols="30"
+                                    pInputTextarea></textarea>
+                            </div>
+                            <div class="field col-12">
+                                <label for="imagep">Imagen (URL)</label>
+                                <textarea id="imagep" formControlName="image" rows="1" cols="30"
+                                    pInputTextarea></textarea>
+                            </div>
+                            <div class="field col-12 flex align-items-center gap-1">
+                                <p-checkbox formControlName="public" value="false" inputId="ny" [binary]="true" />
+                                <label for="ny">Comunidad publica</label>
                             </div>
                             <div class="field col-6 md:col-6">
-                                <label htmlFor="password">Contraseña *</label>
-                                <p-password formControlName="password"></p-password>
+                                <label for="password">Contraseña </label>
+                                <p-password id="password" formControlName="password"></p-password>
                             </div>
-                            <div class="field col-6 md:col-6">
-                                <label htmlFor="confirmPassword">Repite Contraseña *</label>
-                                <p-password formControlName="confirmPassword"></p-password>
+                            <div class="field col-6 md:col-6" *ngIf="registerForm.get('password').value">
+                                <label for="confirmPassword">Repite Contraseña </label>
+                                <p-password id="confirmPassword" formControlName="confirmPassword"></p-password>
                             </div>
                             <div *ngIf="registerForm.hasError('passwordMismatch')" class="col-12">
                                 <small class="p-error">Las contraseñas no coinciden.</small>
@@ -33,7 +65,8 @@
                     </p-fieldset>
                 </div>
                 <br />
-                <button pButton pRipple label="Registrarse" class="w-full p-3 text-xl" [disabled]="!registerForm.valid || !selectedFile" (click)="doRegister()"></button>
+                <button pButton pRipple label="Registrarse" class="w-full p-3 text-xl" [disabled]="!registerForm.valid"
+                    (click)="doRegister()"></button>
             </form>
         </div>
     </div>

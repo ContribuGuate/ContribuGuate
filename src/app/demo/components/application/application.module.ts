@@ -49,6 +49,9 @@ import { EventsComponent } from './events/events.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { TimelineModule } from 'primeng/timeline';
 import { TrackorganizationComponent } from './trackorganization/trackorganization.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -87,7 +90,10 @@ import { TrackorganizationComponent } from './trackorganization/trackorganizatio
     AvatarModule,
     InputTextModule,
     BadgeModule,
+    InputTextareaModule,
     DialogModule,
+    CheckboxModule,
+    DropdownModule,
     ReactiveFormsModule,
     DataViewModule,
     TagModule,

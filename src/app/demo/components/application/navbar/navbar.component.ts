@@ -2,6 +2,7 @@ import { DOCUMENT } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 import { LayoutService } from "src/app/layout/service/app.layout.service";
 import { CommunityService } from "src/app/services/community.service";
 
@@ -124,7 +125,7 @@ export class AppNavbarComponent {
         }
     ]
     constructor(private router: Router, private fb: FormBuilder, public layoutService: LayoutService,
-        private communityService: CommunityService
+        private communityService: CommunityService, private toast: ToastrService
     ) {
         this.joinCommunityForm = this.fb.group({
             code: ['', Validators.compose([Validators.required, Validators.minLength(12), Validators.maxLength(12)])]
@@ -156,6 +157,9 @@ export class AppNavbarComponent {
             }else{
                 this.communityDialog = false;
                 this.joinCommunityForm.reset();
+                this.toast.error(e.message ?? "Error al unirse a la comunidad", "Comunidades", {
+                    timeOut: 4500
+                });
             }
         })
       }
