@@ -1,2 +1,10 @@
-
+<br/>
 <full-calendar id="calendar" [options]="calendarOptions" [events]="events"></full-calendar>
+
+<p-dialog header="Detalles del Evento" [(visible)]="displayDialog" modal="true" [closable]="true" [style]="{width: '30vw'}">
+    <div *ngIf="selectedEvent">
+      <h3>{{ selectedEvent.title }}</h3>
+      <p>{{ selectedEvent.startStr | date }}</p>
+      <p>{{ selectedEvent.extendedProps.description }}</p> <!-- Aquí podrías tener una descripción adicional del evento -->
+    </div>
+  </p-dialog>

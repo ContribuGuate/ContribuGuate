@@ -52,6 +52,8 @@ import { TrackorganizationComponent } from './trackorganization/trackorganizatio
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { EventService } from 'src/app/services/event.service';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,7 @@ import { DropdownModule } from 'primeng/dropdown';
     DialogModule,
     CheckboxModule,
     DropdownModule,
+    SelectButtonModule,
     ReactiveFormsModule,
     DataViewModule,
     TagModule,
@@ -109,6 +112,6 @@ import { DropdownModule } from 'primeng/dropdown';
     PasswordModule,  // <-- Add this line for p-password
     FileUploadModule // <-- Add this if you use pInputFile or file input
   ],
-  providers: [MessageService, CommunityService, TabView, OrganizationService]
+  providers: [MessageService, CommunityService, TabView, OrganizationService, EventService]
 })
 export class ApplicationModule { }

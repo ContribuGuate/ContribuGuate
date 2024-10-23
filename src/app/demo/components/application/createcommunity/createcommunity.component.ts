@@ -18,7 +18,10 @@ export class CreatecommunityComponent {
     selectedFile: File | null = null;
 
     public organizations: any[] = [];
-
+    stateOptions: any[] = [
+        { label: 'Publica', value: true },
+        { label: 'Privada', value: false }
+    ];
     constructor(
         public layoutService: LayoutService,
         private fb: FormBuilder,
