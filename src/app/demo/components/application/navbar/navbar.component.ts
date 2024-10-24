@@ -110,7 +110,10 @@ export class AppNavbarComponent {
                 },
                 {
                     label: 'Historial de participacion',
-                    icon: 'pi pi-history'
+                    icon: 'pi pi-history',
+                    command: () => {
+                        this.router.navigate(['app/histories']);
+                    }
                 },
                 {
                     label: 'Recomendaciones',

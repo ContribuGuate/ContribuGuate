@@ -11,6 +11,7 @@ import { OrganizationsComponent } from './organizations/organizations.component'
 import { CreateorganizationComponent } from './createorganization/createorganization.component';
 import { TrackorganizationComponent } from './trackorganization/trackorganization.component';
 import { CreateeventComponent } from './createevent/createevent.component';
+import { HistoriesComponent } from './histories/histories.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
       {
         path: 'event/create',
         component: CreateeventComponent
+      },
+      {
+        path: 'histories',
+        component: HistoriesComponent
       }
     ]
   }
