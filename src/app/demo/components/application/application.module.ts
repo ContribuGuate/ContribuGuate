@@ -55,6 +55,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { EventService } from 'src/app/services/event.service';
 import { AppConfigModule } from 'src/app/layout/config/config.module';
+import { HistoriesComponent } from './histories/histories.component'; 
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { AppConfigModule } from 'src/app/layout/config/config.module';
     TimelineModule,
     FieldsetModule,  // <-- Add this line for p-fieldset
     PasswordModule,  // <-- Add this line for p-password
-    FileUploadModule // <-- Add this if you use pInputFile or file input
+    FileUploadModule,
+    HistoriesComponent 
   ],
   providers: [MessageService, CommunityService, TabView, OrganizationService, EventService]
 })
