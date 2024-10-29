@@ -1,0 +1,29 @@
+<div class="p-grid" style="height: 100vh; padding: 1rem;" *ngIf="organizationObj">
+    <div class="p-col-12">
+      <p-card class="organization-card">
+        <ng-template pTemplate="header">
+          <h2>Información de la Organización</h2>
+        </ng-template>
+        <img [src]="organizationObj.image" alt="Logo de la organización" class="organization-logo"/>
+        <p><strong>Nombre:</strong> {{ organizationObj.name }}</p>
+        <p><strong>Descripción:</strong> {{ organizationObj.description }}</p>
+      </p-card>
+    </div>
+
+    <div class="p-col-12" style="margin-top: 1rem;">
+      <p-timeline [value]="events" align="alternate" styleClass="customized-timeline" *ngIf="events && events.length > 0">
+        <ng-template pTemplate="marker" let-event>
+          <span 
+            class="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1" 
+            [style]="{ 'background-color': event.color }">
+              <i [class]="event.icon"></i>
+          </span>
+        </ng-template>
+        <ng-template pTemplate="content" let-event>
+          <p-card [header]="event.label" [subheader]="event.updatedAt | date: 'dd-MM-yyyy hh:mm'">
+            <p>{{ event.description }}</p>
+          </p-card>
+        </ng-template>
+      </p-timeline>
+    </div>
+  </div>

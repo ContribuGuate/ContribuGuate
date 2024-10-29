@@ -1,3 +1,4 @@
+import { CalendarModule } from 'primeng/calendar';
 import { Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -38,13 +39,23 @@ import { PanelModule } from 'primeng/panel';
 import { CreatecommunityComponent } from './createcommunity/createcommunity.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { ChipsModule } from 'primeng/chips';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PasswordModule } from 'primeng/password';
 import { FileUploadModule } from 'primeng/fileupload';
 import { OrganizationsComponent } from './organizations/organizations.component';
 import { OrganizationService } from 'src/app/services/organization.service';
 import { CreateorganizationComponent } from './createorganization/createorganization.component';
+import { EventsComponent } from './events/events.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { TimelineModule } from 'primeng/timeline';
+import { TrackorganizationComponent } from './trackorganization/trackorganization.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { EventService } from 'src/app/services/event.service';
+import { AppConfigModule } from 'src/app/layout/config/config.module';
+import { HistoriesComponent } from './histories/histories.component'; 
 
 @NgModule({
   declarations: [
@@ -56,11 +67,14 @@ import { CreateorganizationComponent } from './createorganization/createorganiza
     MycommunitiesComponent,
     CreatecommunityComponent,
     OrganizationsComponent,
-    CreateorganizationComponent
+    CreateorganizationComponent,
+    EventsComponent,
+    TrackorganizationComponent
   ],
   imports: [
     CommonModule,
     ApplicationRoutingModule,
+    AppConfigModule,
     StyleClassModule,
     ButtonModule,
     DividerModule,
@@ -81,20 +95,27 @@ import { CreateorganizationComponent } from './createorganization/createorganiza
     AvatarModule,
     InputTextModule,
     BadgeModule,
+    InputTextareaModule,
     DialogModule,
+    CheckboxModule,
+    DropdownModule,
+    SelectButtonModule,
     ReactiveFormsModule,
     DataViewModule,
     TagModule,
     InputSwitchModule,
+    FullCalendarModule,
     FormsModule,
     InputGroupModule,
     TabViewModule,
     AvatarModule,
     PanelModule,
+    TimelineModule,
     FieldsetModule,  // <-- Add this line for p-fieldset
     PasswordModule,  // <-- Add this line for p-password
-    FileUploadModule // <-- Add this if you use pInputFile or file input
+    FileUploadModule,
+    HistoriesComponent 
   ],
-  providers: [MessageService, CommunityService, TabView, OrganizationService]
+  providers: [MessageService, CommunityService, TabView, OrganizationService, EventService]
 })
 export class ApplicationModule { }

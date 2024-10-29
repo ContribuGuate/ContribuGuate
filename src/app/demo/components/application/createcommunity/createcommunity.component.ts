@@ -4,6 +4,7 @@ import { LayoutService } from "src/app/layout/service/app.layout.service";
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CommunityService } from 'src/app/services/community.service';
+import { OrganizationService } from 'src/app/services/organization.service';
 
 @Component({
   selector: 'app-createcommunity',
@@ -16,21 +17,40 @@ export class CreatecommunityComponent {
 
     selectedFile: File | null = null;
 
+    public organizations: any[] = [];
+    stateOptions: any[] = [
+        { label: 'Publica', value: true },
+        { label: 'Privada', value: false }
+    ];
     constructor(
         public layoutService: LayoutService,
         private fb: FormBuilder,
         private communityService: CommunityService,
+        private organizationService: OrganizationService,
         private toast: ToastrService,
         private router: Router
     ) { 
+        this.getOrganizations()
         this.registerForm = this.fb.group({
             name: ['', Validators.required],
-            password: ['', Validators.required],
-            confirmPassword: ['', Validators.required],
+            password: [''],
+            confirmPassword: [''],
             description: [''],  
+            image: ['', Validators.required],
+            public: [true, Validators.required],
+            organization: [null, Validators.required]
         }, { validators: this.passwordMatchValidator });
     }
 
+    getOrganizations(){
+        this.organizationService.getOrganizations().subscribe(response => {
+            if (response.success == true) {
+                this.organizations = response.organizations
+            }else{
+                this.organizations = []
+            }
+        })
+    }
     passwordMatchValidator(formGroup: AbstractControl): { [key: string]: any } | null {
         const password = formGroup.get('password')?.value;
         const confirmPassword = formGroup.get('confirmPassword')?.value;
@@ -48,18 +68,19 @@ export class CreatecommunityComponent {
     }
 
     doRegister() {
-        if (this.registerForm.valid && this.selectedFile) {
+        if (this.registerForm.valid) {
             const formValues = this.registerForm.value;
 
-            const formData = new FormData();
-            formData.append('name', formValues.name);  
-            formData.append('password', formValues.password);
-            formData.append('description', formValues.description);  
-            formData.append('imagep', this.selectedFile, this.selectedFile.name);
-
+            const formData = {
+                name: formValues.name,
+                description: formValues.description,
+                image: formValues.image,
+                public: formValues.public,
+                organization: formValues.organization.uuid
+             };
             // Ajustar el servicio para llamar al endpoint correcto
             this.communityService.registerCommunity(formData).subscribe(response => {
-                if (response.success) {
+                if (response.success == true) {
                     this.toast.success(response.message, "Registro", { timeOut: 3500 });
                     this.router.navigate(['/app/feed']);
                 } else {

@@ -1,0 +1,29 @@
+<div class="history-container">
+  <h2>Historial de Participación</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Evento</th>
+        <th>Fecha</th>
+        <th>Descripción de Participación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="noData">
+        <td colspan="3" class="no-data">No se encontraron datos recientes</td>
+      </tr>
+
+      <tr *ngFor="let entry of historyEntries">
+        <td>{{ entry.evento?.name || 'N/A' }}</td> 
+        <td>{{ entry.fechaParticipacion }}</td>
+        <td>{{ entry.descripcionVoluntariado }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <button class="btn btn-primary" (click)="downloadPDF()">Descargar PDF</button>
+    <button class="btn btn-secondary" (click)="generateReport()">Generar Reporte</button>
+  </div>
+</div>

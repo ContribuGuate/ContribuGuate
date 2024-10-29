@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
   selector: 'app-feed',
@@ -29,7 +30,7 @@ export class FeedComponent {
   ];
 
 
-  constructor(public router: Router){}
+  constructor(public router: Router, public layoutService: LayoutService){}
 
 
   

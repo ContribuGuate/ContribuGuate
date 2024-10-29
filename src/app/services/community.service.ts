@@ -25,6 +25,11 @@ export class CommunityService {
     .pipe<GetCommunityResponse>(map(this.extractData))
   }
 
+  public getByCode(code: string){
+    return this.http.get(environment.baseUrl + 'community/code/' + code)
+    .pipe<GetCommunityResponse>(map(this.extractData))
+  }
+
   public join(uid: string, password?: string){
     return this.http.post(environment.baseUrl + 'community/join', {
       uuid: uid,
@@ -38,8 +43,8 @@ export class CommunityService {
     .pipe(map(this.extractData));
   }
 
-  public registerCommunity(formData: FormData) {
-    return this.http.post(environment.baseUrl + 'community/register', formData)
+  public registerCommunity(formData: any) {
+    return this.http.post(environment.baseUrl + 'community/add', formData)
       .pipe(map(this.extractData));
   }
 

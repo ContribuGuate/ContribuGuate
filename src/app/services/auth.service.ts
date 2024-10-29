@@ -20,6 +20,12 @@ export class AuthService {
     .pipe<LoginResponse>(map(this.extractData))
   }
 
+
+  public getProfile(){
+    return this.http.get(environment.baseUrl + 'auth/profile')
+    .pipe(map(this.extractData))
+  }
+
  
   
 }
