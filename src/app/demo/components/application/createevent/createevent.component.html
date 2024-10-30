@@ -1,1 +1,77 @@
-<p>createevent works!</p>
+<br />
+<div
+    style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(91, 181, 255, 0) 30%); max-width: 600px; margin: 0 auto;">
+    <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+        <div class="text-center mb-5">
+            <div class="text-900 text-3xl font-medium mb-3">Registro de Eventos</div>
+            <span class="text-600 font-medium">Completa los datos obligatorios (*) para registrar un evento</span>
+        </div>
+
+        <div class="p-fluid p-formgrid grid">
+            <form [formGroup]="registerEventForm">
+                <div class="col-12">
+                    <p-fieldset legend="Información de evento">
+                        <div class="p-fluid p-formgrid grid">
+                            <div class="field col-12">
+                                <label for="name">Nombre*</label>
+                                <input pInputText id="name" type="text" formControlName="name" />
+                            </div>
+                            <div class="field col-12">
+                                <label for="descp">Descripción</label>
+                                <textarea id="descp" formControlName="description" rows="2" cols="20"
+                                    pInputTextarea></textarea>
+                            </div>
+                            <div class="field col-12">
+                                <label for="addr">Dirección</label>
+                                <textarea id="addr" formControlName="address" rows="2" cols="20"
+                                    pInputTextarea></textarea>
+                            </div>
+                            <div class="field col-12">
+                                <label for="dtev">Fecha/hora *</label>
+                                <p-calendar formControlName="date" [showIcon]="true"
+                                 [showOnFocus]="false"
+                                 [touchUI]="true"
+                                [showTime]="true" 
+                                [hourFormat]="12"
+                                dateFormat="dd.mm.yy"
+                                    inputId="dtev" />
+                            </div>
+                            <div class="field col-12">
+                                <label for="lnk">Link de referencia</label>
+                                <input pInputText id="lnk" type="text" formControlName="link" />
+                            </div>
+                            <div class="field col-12">
+                                <label for="imagep">Imagen (URL) *</label>
+                                <textarea id="imagep" formControlName="image" rows="1" cols="30"
+                                    pInputTextarea></textarea>
+                            </div>
+                            <div class="field col-12">
+                                <label for="community">Comunidad</label>
+                                <p-dropdown id="community" [options]="communities" formControlName="community"
+                                    optionLabel="name" [showClear]="true" placeholder="Selecciona una comunidad">
+                                    <ng-template pTemplate="selectedItem">
+                                        <div class="flex align-items-center gap-2"
+                                            *ngIf="registerEventForm.get('community')?.value">
+                                            <img [src]="registerEventForm.get('community')?.value.coverImage"
+                                                style="width: 18px" />
+                                            <div>{{ registerEventForm.get('community')?.value.name }}</div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="flex align-items-center gap-2">
+                                            <img [src]="country.coverImage" style="width: 18px" />
+                                            <div>{{ country.name }}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+
+                            </div>
+                        </div>
+                    </p-fieldset>
+                </div>
+                <br />
+                <button pButton pRipple label="Guardar" class="w-full p-3 text-xl" [disabled]="!registerEventForm.valid" (click)="saveEvent()"></button>
+            </form>
+        </div>
+    </div>
+</div>

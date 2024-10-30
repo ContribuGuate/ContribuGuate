@@ -17,7 +17,7 @@ import { FeedComponent } from './feed/feed.component';
 import { CommunitiesComponent } from './communities/communities.component';
 import { CardModule } from 'primeng/card';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { TimeagoModule } from 'ngx-timeago';
+import { TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { MenuModule } from 'primeng/menu';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TooltipModule } from 'primeng/tooltip';
@@ -56,7 +56,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { EventService } from 'src/app/services/event.service';
 import { AppConfigModule } from 'src/app/layout/config/config.module';
 import { HistoriesComponent } from './histories/histories.component'; 
-
+import { CreateeventComponent } from './createevent/createevent.component';
+import { PostService } from 'src/app/services/post.service';
 @NgModule({
   declarations: [
     MainComponent,
@@ -69,7 +70,8 @@ import { HistoriesComponent } from './histories/histories.component';
     OrganizationsComponent,
     CreateorganizationComponent,
     EventsComponent,
-    TrackorganizationComponent
+    TrackorganizationComponent,
+    CreateeventComponent
   ],
   imports: [
     CommonModule,
@@ -114,8 +116,11 @@ import { HistoriesComponent } from './histories/histories.component';
     FieldsetModule,  // <-- Add this line for p-fieldset
     PasswordModule,  // <-- Add this line for p-password
     FileUploadModule,
-    HistoriesComponent 
+    HistoriesComponent,
+    SpeedDialModule,
+    DropdownModule,
+    CalendarModule
   ],
-  providers: [MessageService, CommunityService, TabView, OrganizationService, EventService]
+  providers: [MessageService, CommunityService, TabView, OrganizationService, EventService, PostService, TimeagoIntl]
 })
 export class ApplicationModule { }

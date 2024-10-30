@@ -6,6 +6,7 @@ import { ToastrService } from "ngx-toastr";
 import { LayoutService } from "src/app/layout/service/app.layout.service";
 import { AuthService } from "src/app/services/auth.service";
 import { CommunityService } from "src/app/services/community.service";
+import { PostService } from "src/app/services/post.service";
 
 @Component({
     selector: 'app-auth-navbar',
@@ -20,6 +21,32 @@ export class AppNavbarComponent {
     public communityDialog: boolean = false;
     public darkMode: boolean = false;
     public communityToJoin: any = null;
+    public postVisible: boolean = false;
+    public postForm: FormGroup;
+    countries: any[] | undefined;
+    public communitiesArr: any[] = [];
+    postTypes = [
+        {
+            name: 'post',
+            label: 'Post',
+            icon: 'pi pi-pencil',
+        },
+        {
+            name: 'donation',
+            label: 'Donacion',
+            icon: 'pi pi-money-bill',
+        },
+        {
+            name: 'goal',
+            label: 'Meta',
+            icon: 'pi pi-chart-pie',
+        },
+        {
+            name: 'request',
+            label: 'Solicitud',
+            icon: 'pi pi-info-circle',
+        }
+    ]
   
     #document = inject(DOCUMENT);
     items = [
@@ -29,6 +56,19 @@ export class AppNavbarComponent {
             command: () => {
                 this.router.navigate(['/app/feed']);
             }
+        },
+        {
+            label: 'Social',
+            icon: 'pi pi-users',
+            items: [
+                {
+                    label: 'Crear post',
+                    icon: 'pi pi-pencil',
+                    command: () => {
+                        this.postVisible = !this.postVisible
+                    }
+                }
+            ]
         },
         {
             label: 'Organizaciones',
@@ -163,13 +203,45 @@ export class AppNavbarComponent {
     ]
     constructor(private router: Router, private fb: FormBuilder, public layoutService: LayoutService,
         private communityService: CommunityService, private toast: ToastrService,
-        private authService: AuthService
+        private authService: AuthService,
+        private communities: CommunityService,
+        private postService: PostService
     ) {
         this.joinCommunityForm = this.fb.group({
             code: ['', Validators.compose([Validators.required, Validators.minLength(12), Validators.maxLength(12)])]
         })
 
+        this.postForm = this.fb.group({
+            title: ['', Validators.required],
+            description: ['', Validators.required],
+            image: [''],
+            type: [null, Validators.required],
+            community: [null]
+        })
         this.getProfile()
+        this.countries = [
+            { name: 'Australia', code: 'AU' },
+            { name: 'Brazil', code: 'BR' },
+            { name: 'China', code: 'CN' },
+            { name: 'Egypt', code: 'EG' },
+            { name: 'France', code: 'FR' },
+            { name: 'Germany', code: 'DE' },
+            { name: 'India', code: 'IN' },
+            { name: 'Japan', code: 'JP' },
+            { name: 'Spain', code: 'ES' },
+            { name: 'United States', code: 'US' }
+        ];
+
+
+        this.communities.getCommunities()
+        .subscribe((e) => {
+            if(e.success == true){
+                this.communitiesArr = e.communities
+            }else{
+                this.communitiesArr = []
+            }
+        })
+
      }
 
      public async getProfile(){
@@ -193,6 +265,23 @@ export class AppNavbarComponent {
           linkElem.href = 'assets/layout/styles/theme/md-light-indigo/theme.css'
           localStorage.setItem('system.Theme', 'light');
         }
+      }
+
+
+      public async addPost(){
+        this.postService.addPost(this.postForm.value).subscribe((e) => {
+            if(e.success == true){
+                this.postVisible = false;
+                this.postForm.reset();
+                this.postService.emitPostAdded(e.post);
+                this.toast.success(e.message ?? "Publicacion agregada", "Publicaciones", {
+                    timeOut: 4500
+                });
+            }else{
+                this.toast.error(e.message ?? "Error al crear la publicacion", "Publicaciones", {
+                
+            })}
+        })
       }
 
 

@@ -1,10 +1,15 @@
 <br/>
 <full-calendar id="calendar" [options]="calendarOptions" [events]="events"></full-calendar>
 
-<p-dialog header="Detalles del Evento" [(visible)]="displayDialog" modal="true" [closable]="true" [style]="{width: '30vw'}">
+<p-dialog header="Detalles del Evento" [(visible)]="displayDialog" modal="true" [closable]="true" [style]="{ width: '50rem' }" 
+[breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
     <div *ngIf="selectedEvent">
+      <img *ngIf="selectedEvent.extendedProps.image" [src]="selectedEvent.extendedProps.image" alt="Event image" />
       <h3>{{ selectedEvent.title }}</h3>
       <p>{{ selectedEvent.startStr | date }}</p>
       <p>{{ selectedEvent.extendedProps.description }}</p> <!-- Aquí podrías tener una descripción adicional del evento -->
+      <p *ngIf="selectedEvent.extendedProps.link">
+        <a href="{{ selectedEvent.extendedProps.link }}" target="_blank">Mas Información</a>
+      </p>
     </div>
-  </p-dialog>
+</p-dialog>

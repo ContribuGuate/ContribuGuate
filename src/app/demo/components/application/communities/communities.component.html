@@ -25,7 +25,7 @@
                             <div class="flex flex-row-reverse md:flex-row gap-2">
                                 <!-- <p-button icon="pi pi-heart" [outlined]="true" /> -->
                                 <p-button *ngIf="item.public" icon="pi pi-plus" class="flex-auto md:flex-initial white-space-nowrap" label="Unirse" (click)="join(item)" />
-                                <p-button *ngIf="!item.public" icon="pi pi-stopwatch" class="flex-auto md:flex-initial white-space-nowrap" label="Solicitar unirse" />
+                                <p-button *ngIf="!item.public" icon="pi pi-lock" class="flex-auto md:flex-initial white-space-nowrap" label="Solicitar unirse" />
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                         <div class="flex flex-column gap-4 mt-4">
                             <div class="flex gap-2">
                                 <p-button *ngIf="product.public" icon="pi pi-plus" class="flex-auto md:flex-initial white-space-nowrap" label="Unirse" (click)="join(product)" />
-                                <p-button *ngIf="!product.public" icon="pi pi-stopwatch" class="flex-auto md:flex-initial white-space-nowrap" label="Solicitar unirse" />
+                                <p-button *ngIf="!product.public" icon="pi pi-lock" class="flex-auto md:flex-initial white-space-nowrap" label="Solicitar unirse" />
                                 <!-- <p-button icon="pi pi-heart" [outlined]="true" /> -->
                             </div>
                         </div>

@@ -30,15 +30,11 @@
     <div class="flex align-items-center gap-3 mb-3">
       <div class="flex flex-column gap-2">
         <label for="code">Codigo de comunidad</label>
-        <input 
-            pInputText 
-            id="code" 
-            aria-describedby="username-help" 
-            formControlName="code" />
+        <input pInputText id="code" aria-describedby="username-help" formControlName="code" />
         <small id="username-help">
-            El codigo que te compartieron debe contener 12 caracteres
+          El codigo que te compartieron debe contener 12 caracteres
         </small>
-    </div>
+      </div>
     </div>
     <div class="flex justify-content-end gap-2">
       <p-button label="Cancelar" severity="secondary" (onClick)="joinCommunityVisible = false" />
@@ -63,44 +59,44 @@
 <p-dialog header="Unirse a una comunidad" [modal]="true" [(visible)]="communityDialog"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }" *ngIf="communityToJoin">
   <div class="flex align-items-center gap-3 mb-3">
-    <p-card [header]="communityToJoin.organization.name" [subheader]="communityToJoin.name" [style]="{ width: '360px' }">
+    <p-card [header]="communityToJoin.organization.name" [subheader]="communityToJoin.name"
+      [style]="{ width: '360px' }">
       <ng-template pTemplate="header">
-          <img alt="Card" [src]="communityToJoin.coverImage" />
+        <img alt="Card" [src]="communityToJoin.coverImage" />
       </ng-template>
       <p>
         {{communityToJoin.description}}
       </p>
-  </p-card>
-  
+    </p-card>
+
   </div>
   <div class="flex justify-content-end gap-2">
-    <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (click)="communityDialog = false; communityToJoin =null" />
-    <p-button label="Unirse" icon="pi pi-link" iconPos="right"  />
+    <p-button label="Cancelar" icon="pi pi-times" severity="secondary"
+      (click)="communityDialog = false; communityToJoin =null" />
+    <p-button label="Unirse" icon="pi pi-link" iconPos="right" />
   </div>
 </p-dialog>
 
 <p-dialog header="Información personal" [modal]="true" [(visible)]="personalInfo"
-  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }" 
-  [draggable]="false" [resizable]="false" [closable]="true" *ngIf="personalInfoObj">
-  
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }" [draggable]="false"
+  [resizable]="false" [closable]="true" *ngIf="personalInfoObj">
+
   <div class="flex flex-column align-items-center gap-3 mb-3">
     <!-- Imagen del perfil del usuario -->
-    <img src="../../../../../assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo outline' : 'logo'}}.png" 
-         alt="Imagen de perfil" 
-         style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" />
+    <img
+      src="../../../../../assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo outline' : 'logo'}}.png"
+      alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" />
 
     <!-- Nombre de usuario e ícono de verificado si está verificado -->
     <div class="flex align-items-center">
-      <h3 class="m-0">{{ personalInfoObj.person.firstname }} 
-        {{ personalInfoObj.person.secondname ? personalInfoObj.person.secondname : '' }} 
-        {{ personalInfoObj.person.surname }} 
+      <h3 class="m-0">{{ personalInfoObj.person.firstname }}
+        {{ personalInfoObj.person.secondname ? personalInfoObj.person.secondname : '' }}
+        {{ personalInfoObj.person.surname }}
         {{ personalInfoObj.person.secondsurname ? personalInfoObj.person.secondsurname : '' }}</h3>
-      <i *ngIf="personalInfoObj.person.verified" 
-         class="pi pi-verified" 
-         style="font-size: 1.1rem; color: rgb(0, 119, 255); margin-left: 0.5rem;" 
-         title="Usuario verificado"></i>
+      <i *ngIf="personalInfoObj.person.verified" class="pi pi-verified"
+        style="font-size: 1.1rem; color: rgb(0, 119, 255); margin-left: 0.5rem;" title="Usuario verificado"></i>
 
-         
+
     </div>
 
     <p>Usuario: {{ '@' + personalInfoObj.username }}</p>
@@ -117,4 +113,69 @@
       <p>Estado: Inactiva</p>
     </ng-template> -->
   </div>
+</p-dialog>
+
+
+
+<p-dialog header="Crear nuevo post" [modal]="true" [(visible)]="postVisible"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }">
+  <span class="p-text-secondary block mb-5">Completa la información del post a tu gusto</span>
+  <form [formGroup]="postForm">
+    <div class="flex align-items-center gap-3 mb-3">
+      <label for="title" class="font-semibold w-6rem">Titulo*</label>
+      <input formControlName="title" pInputText id="title" class="flex-auto" autocomplete="off"
+        placeholder="Ingresa un titulo llamativo..." required />
+    </div>
+    <div class="flex align-items-center gap-3 mb-3">
+      <label for="desc" class="font-semibold w-6rem">Contenido*</label>
+      <textarea placeholder="Ingresa un contenido..." formControlName="description" id="desc" rows="2" cols="30" pInputTextarea required>
+  </textarea>
+
+    </div>
+
+    <div class="flex align-items-center gap-3 mb-3">
+      <label for="img" class="font-semibold w-6rem">Imagen</label>
+      <input formControlName="image" pInputText id="img" class="flex-auto" autocomplete="off"
+        placeholder="Enlace de la imagen" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-3">
+      <label for="post" class="font-semibold w-6rem">Tipo de post*</label>
+      <p-dropdown appendTo="body" id="post" [options]="postTypes" formControlName="type" optionLabel="label" [showClear]="true"
+        placeholder="Selecciona un tipo de post">
+        <ng-template pTemplate="selectedItem">
+          <div class="flex align-items-center gap-2" *ngIf="postForm.get('type')?.value">
+            <span><i [class]="postForm.get('type')?.value.icon"></i></span>
+            <div>{{ postForm.get('type')?.value.label }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-country pTemplate="item">
+          <div class="flex align-items-center gap-2">
+            <div>{{ country.label }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="flex align-items-center gap-3 mb-3" *ngIf="postForm.get('type')?.value">
+      <label for="comm" class="font-semibold w-6rem">Comunidad</label>
+      <p-dropdown appendTo="body" id="comm" [options]="communitiesArr" formControlName="community" optionLabel="label" [showClear]="true"
+        placeholder="Selecciona una comunidad">
+        <ng-template pTemplate="selectedItem">
+          <div class="flex align-items-center gap-2" *ngIf="postForm.get('community')?.value">
+            <img [src]="postForm.get('community')?.value.coverImage"
+                                                style="width: 18px" />
+            <div>{{ postForm.get('community')?.value.name }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-country pTemplate="item">
+          <div class="flex align-items-center gap-2">
+            <img [src]="country.coverImage" style="width: 18px" />
+            <div>{{ country.name }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="flex justify-content-end gap-2">
+      <p-button label="Postear" icon="pi pi-send" iconPos="right" [disabled]="!postForm.valid" (click)="addPost()" />
+    </div>
+  </form>
 </p-dialog>

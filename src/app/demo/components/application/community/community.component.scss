@@ -54,3 +54,12 @@
     padding: 1rem;
   }
   
+
+  :host ::ng-deep {
+    .speeddial-mask-demo {
+        .p-speeddial-direction-up {
+            right: 0;
+            bottom: 0;
+        }
+    }
+}

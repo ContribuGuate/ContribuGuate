@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommunityService } from 'src/app/services/community.service';
 import { environment } from 'src/environments/environment';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-community',
@@ -15,6 +16,7 @@ export class CommunityComponent {
   public organization: any = ''
   public communityObj: any = {}
   public inviteLink: string = 'https://test.com/invite/abcdefg';
+  public items: MenuItem[] = [];
   posts = [
     {
       title: 'Tree Planting',
@@ -33,45 +35,75 @@ export class CommunityComponent {
   constructor(private route: ActivatedRoute, private community: CommunityService, private toast: ToastrService,
     private router: Router, private clipboard: Clipboard
   ) {
-    this.route.paramMap.subscribe( paramMap => {
+    this.route.paramMap.subscribe(paramMap => {
       this.organization = paramMap.get('id');
       this.community.getOne(this.organization)
-      .subscribe((e) => {
-        if(e.success == true){
-          this.communityObj = e.community
-        }else{
-          this.toast.error(e.message ?? "Error al cargar comunidad", "Comunidades", {
-            timeOut: 4500
-          });
-          this.router.navigate(['/app/communities']);
+        .subscribe((e) => {
+          if (e.success == true) {
+            this.communityObj = e.community
+          } else {
+            this.toast.error(e.message ?? "Error al cargar comunidad", "Comunidades", {
+              timeOut: 4500
+            });
+            this.router.navigate(['/app/communities']);
+          }
+        })
+    });
+
+    this.items = [
+      {
+        icon: 'pi pi-pencil',
+        command: () => {
+          
         }
-      })
-  })
+      },
+      {
+        icon: 'pi pi-refresh',
+        command: () => {
+          
+        }
+      },
+      {
+        icon: 'pi pi-trash',
+        command: () => {
+          
+        }
+      },
+      {
+        icon: 'pi pi-upload',
+        routerLink: ['/fileupload']
+      },
+      {
+        icon: 'pi pi-external-link',
+        target: '_blank',
+        url: 'http://angular.io'
+      }
+    ];
   }
 
-  public getUserLabel(user){
+  public getUserLabel(user) {
     return user.firstname.charAt(0) + user.surname.charAt(0);
   }
 
-  public copyInviteLink(){
-    try{
+  public copyInviteLink() {
+    try {
       this.clipboard.copy(this.inviteLink);
       this.toast.success("Enlace de invitación copiado", "Comunidades", {
         timeOut: 4500
       })
-    }catch(err){
+    } catch (err) {
       this.toast.error("El enlace de invitación no se pudo copiar", "Comunidades", {
         timeOut: 4800
       })
     }
-    
-  }
-
-  public donate(){
 
   }
 
-  public isAdmin(){
-    return this.communityObj.communityMemberships?.some((m) => m.is_admin === true)
+  public donate() {
+
+  }
+
+  public isAdmin() {
+    return this.communityObj.communityMemberships?.some(item => item.role.name === "administrator")
   }
 }

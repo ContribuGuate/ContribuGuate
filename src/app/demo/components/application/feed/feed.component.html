@@ -1,36 +1,55 @@
 <div class="surface-0 flex justify-content-center">
   <div id="home" class="landing-wrapper overflow-hidden">
-
-    <!-- <app-auth-navbar></app-auth-navbar> -->
-
-    <!-- <p-inputSwitch [ngModel]="darkMode" (ngModelChange)="onToggleDarkMode()" /> -->
-
-
     <div id="hero" class="surface-card p-4 border-round">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-        <div *ngFor="let post of posts" class="surface-card p-4 border-round">
-          <img src="{{ post.image }}" alt="Imagen del post" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h5 class="text-900 font-medium">{{ post.title }}</h5>
-            <p class="text-600">{{ post.description }}</p>
-            <p-button pRipple [text]="true" [plain]="true" label="Me gusta" icon="pi pi-heart"
-              iconPos="left"></p-button>
-            <p-button pRipple [text]="true" [plain]="true" label="Comentarios" icon="pi pi-comment"
-              iconPos="left"></p-button>
+      <div class="p-grid">
+        <div *ngFor="let post of posts" class="p-col-12 p-md-4">
+          <div class="surface-card p-4 border-round shadow-2">
+            <div class="flex align-items-center mb-2">
+              <div class="mr-2">
+                <p-avatar 
+                  image="../../../../../assets/layout/images/logo outline.png"
+                  styleClass="mr-2" 
+                  [style]="{ 'background-color': '#ece9fc', color: '#2a1261' }"
+                  size="large" 
+                  shape="circle" />
+              </div>
+              <div>
+                <span class="font-medium text-900">{{ post.author.username }}</span> <br/>
+                <span class="text-600 text-sm"> {{ post.createdAt | timeago:live }}</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h5 class="text-900 font-medium">{{ post.title }}</h5>
+              <p class="text-600">{{ post.description }}</p>
+              <p-button pRipple [text]="true" severity="secondary" [plain]="true" label="Reaccionar" icon="pi pi-thumbs-up"
+                iconPos="left" (onClick)="op.toggle($event)"></p-button>
+
+              <p-overlayPanel #op>
+                <div class="flex flex-column gap-3 w-full md:w-25rem">
+                  <div>
+                    <span class="font-medium text-900 block mb-2">Reaccionar a la publicación</span>
+                  </div>
+                  <div>
+                    <div class="flex flex-row justify-content-center align-items-center gap-2 flex-nowrap">
+                      <p-button label="Me gusta" (click)="react('like', post.uuid)" severity="success" icon="pi pi-thumbs-up" class="flex-grow-1" />
+                      <p-button label="Me encanta" (click)="react('love', post.uuid)" severity="danger" icon="pi pi-heart" class="flex-grow-1" />
+                      <p-button label="Me inspira" (click)="react('inspire', post.uuid)" severity="warning" icon="pi pi-bolt" class="flex-grow-1" />
+                    </div>
+                  </div>
+                </div>
+              </p-overlayPanel>
+            </div>
           </div>
+          <br/>
         </div>
       </div>
     </div>
 
-
-
     <div class="py-4 px-4 mx-0 mt-8 lg:mx-8">
       <div class="grid justify-content-between">
         <div class="col-12 md:col-2" style="margin-top:-1.5rem;">
-          <a
-            class="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
-            <img src="../../../../assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo outline' : 'logo'}}.png" alt="footer sections" width="50" height="50"
-              class="mr-2">
+          <a class="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
+            <img src="../../../../assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo outline' : 'logo'}}.png" alt="footer sections" width="50" height="50" class="mr-2">
             <h4 class="font-medium text-3xl text-900">ContribuGuate</h4>
           </a>
         </div>
@@ -54,19 +73,11 @@
             </div>
 
             <div class="col-12 md:col-3 mt-4 md:mt-0">
-              <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
+              <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Comunidad</h4>
               <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://discord.gg/H6cpzR3pqW" target="_blank">Discord</a>
-              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img
-                  src="assets/demo/images/landing/new-badge.svg" class="ml-2" /></a>
+              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700" [routerLink]="['/app/events']">Eventos<img src="assets/demo/images/landing/new-badge.svg" class="ml-2" /></a>
               <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
               <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
-            </div>
-
-            <div class="col-12 md:col-3 mt-4 md:mt-0">
-              <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
-              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Brand Policy</a>
-              <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
-              <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
             </div>
           </div>
         </div>
@@ -74,6 +85,5 @@
     </div>
   </div>
 </div>
-
 
 <p-scrollTop />
