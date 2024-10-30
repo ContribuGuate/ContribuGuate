@@ -40,7 +40,12 @@
                         ],
                         "scripts": [],
                         "serviceWorker": true,
-                        "ngswConfigPath": "ngsw-config.json"
+                        "ngswConfigPath": "ngsw-config.json",
+                        "allowedCommonJsDependencies": [
+                            "jspdf",
+                            "jspdf-autotable",
+                            "xlsx"
+                        ]
                     },
                     "configurations": {
                         "production": {
