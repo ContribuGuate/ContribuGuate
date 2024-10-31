@@ -1,5 +1,5 @@
 import { CalendarModule } from 'primeng/calendar';
-import { Input, NgModule } from '@angular/core';
+import { Injectable, Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ApplicationRoutingModule } from './application-routing.module';
@@ -17,7 +17,7 @@ import { FeedComponent } from './feed/feed.component';
 import { CommunitiesComponent } from './communities/communities.component';
 import { CardModule } from 'primeng/card';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { TimeagoIntl, TimeagoModule } from 'ngx-timeago';
+import { IL10nsStrings, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { MenuModule } from 'primeng/menu';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TooltipModule } from 'primeng/tooltip';
@@ -58,6 +58,13 @@ import { AppConfigModule } from 'src/app/layout/config/config.module';
 import { HistoriesComponent } from './histories/histories.component'; 
 import { CreateeventComponent } from './createevent/createevent.component';
 import { PostService } from 'src/app/services/post.service';
+import { strings as spanishStrings } from 'ngx-timeago/language-strings/es';
+import { EditorModule } from 'primeng/editor';
+@Injectable()
+export class MyIntl extends TimeagoIntl {
+  override strings = spanishStrings;
+}
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -85,7 +92,6 @@ import { PostService } from 'src/app/services/post.service';
     SpeedDialModule,
     ToastModule,
     CardModule,
-    TimeagoModule.forRoot(),
     OverlayPanelModule,
     ClipboardModule,
     InputGroupAddonModule,
@@ -119,7 +125,11 @@ import { PostService } from 'src/app/services/post.service';
     SpeedDialModule,
     DropdownModule,
     CalendarModule,
-    MycommunitiesComponent
+    MycommunitiesComponent,
+    EditorModule,
+    TimeagoModule.forRoot({
+      intl: { provide: TimeagoIntl, useClass: MyIntl }
+    })
   ],
   providers: [MessageService, CommunityService, TabView, OrganizationService, EventService, PostService, TimeagoIntl]
 })

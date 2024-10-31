@@ -212,9 +212,7 @@ export class AppNavbarComponent {
         })
 
         this.postForm = this.fb.group({
-            title: ['', Validators.required],
             description: ['', Validators.required],
-            image: [''],
             type: [null, Validators.required],
             community: [null]
         })
@@ -269,6 +267,7 @@ export class AppNavbarComponent {
 
 
       public async addPost(){
+        console.log(this.postForm.value)
         this.postService.addPost(this.postForm.value).subscribe((e) => {
             if(e.success == true){
                 this.postVisible = false;

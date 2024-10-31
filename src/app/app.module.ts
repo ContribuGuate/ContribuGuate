@@ -18,6 +18,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpReqInterceptor } from './interceptors/HttpInterceptor';
 import { AuthService } from './services/auth.service';
 import { ConfirmationService } from 'primeng/api';
+import { TimeagoIntl, TimeagoModule } from 'ngx-timeago';
+import { strings as spanishStrings } from 'ngx-timeago/language-strings/es';
+
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],

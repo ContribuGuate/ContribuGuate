@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { BaseResponse } from '../dtos/response';
 import { LoginResponse } from '../dtos/auth/login.response';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Injectable()
@@ -24,6 +24,20 @@ export class AuthService {
   public getProfile(){
     return this.http.get(environment.baseUrl + 'auth/profile')
     .pipe(map(this.extractData))
+  }
+
+  public getUserId(){
+    const token = localStorage.getItem('contribuguateToken') ?? "";
+    if(token){
+      try{
+        const decodedToken: any = jwtDecode(token);
+        return decodedToken.sub || null;
+      }catch(err){
+        return null;
+      }
+    }
+    return null;
+
   }
 
  

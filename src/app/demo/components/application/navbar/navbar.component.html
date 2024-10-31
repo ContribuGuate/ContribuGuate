@@ -122,22 +122,11 @@
   <span class="p-text-secondary block mb-5">Completa la información del post a tu gusto</span>
   <form [formGroup]="postForm">
     <div class="flex align-items-center gap-3 mb-3">
-      <label for="title" class="font-semibold w-6rem">Titulo*</label>
-      <input formControlName="title" pInputText id="title" class="flex-auto" autocomplete="off"
-        placeholder="Ingresa un titulo llamativo..." required />
-    </div>
-    <div class="flex align-items-center gap-3 mb-3">
       <label for="desc" class="font-semibold w-6rem">Contenido*</label>
-      <textarea placeholder="Ingresa un contenido..." formControlName="description" id="desc" rows="2" cols="30" pInputTextarea required>
-  </textarea>
+      <p-editor id="desc" formControlName="description" [style]="{ height: '320px' }" required />
 
     </div>
 
-    <div class="flex align-items-center gap-3 mb-3">
-      <label for="img" class="font-semibold w-6rem">Imagen</label>
-      <input formControlName="image" pInputText id="img" class="flex-auto" autocomplete="off"
-        placeholder="Enlace de la imagen" />
-    </div>
     <div class="flex align-items-center gap-3 mb-3">
       <label for="post" class="font-semibold w-6rem">Tipo de post*</label>
       <p-dropdown appendTo="body" id="post" [options]="postTypes" formControlName="type" optionLabel="label" [showClear]="true"
