@@ -18,7 +18,14 @@
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
                         "allowedCommonJsDependencies": [
-                            "lodash"
+                            "lodash",
+                            "jspdf",
+                            "jspdf-autotable",
+                            "xlsx",
+                            "canvg",
+                            "raf",
+                            "rgbcolor",
+                            "core-js"
                         ],
                         "outputPath": "dist/contribuguate",
                         "index": "src/index.html",
@@ -40,12 +47,7 @@
                         ],
                         "scripts": [],
                         "serviceWorker": true,
-                        "ngswConfigPath": "ngsw-config.json",
-                        "allowedCommonJsDependencies": [
-                            "jspdf",
-                            "jspdf-autotable",
-                            "xlsx"
-                        ]
+                        "ngswConfigPath": "ngsw-config.json"
                     },
                     "configurations": {
                         "production": {

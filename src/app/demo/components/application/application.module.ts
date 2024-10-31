@@ -65,7 +65,6 @@ import { PostService } from 'src/app/services/post.service';
     CommunitiesComponent,
     AppNavbarComponent,
     CommunityComponent,
-    MycommunitiesComponent,
     CreatecommunityComponent,
     OrganizationsComponent,
     CreateorganizationComponent,
@@ -119,7 +118,8 @@ import { PostService } from 'src/app/services/post.service';
     HistoriesComponent,
     SpeedDialModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
+    MycommunitiesComponent
   ],
   providers: [MessageService, CommunityService, TabView, OrganizationService, EventService, PostService, TimeagoIntl]
 })

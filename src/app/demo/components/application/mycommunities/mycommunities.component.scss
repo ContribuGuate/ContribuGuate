@@ -1,0 +1,55 @@
+/* Estilos generales */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+/* Imagen de la comunidad */
+li img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+/* Contenido de texto */
+.community-content {
+  flex-grow: 1;
+}
+
+.community-content h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.community-content p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Botón de salir */
+.leave-button {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
+}
+
+.leave-button:hover {
+  background-color: #c0392b;
+}

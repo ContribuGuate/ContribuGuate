@@ -1,1 +1,17 @@
-<p>mycommunities works!</p>
+<div *ngIf="noData">
+  <p>No hay comunidades disponibles.</p>
+</div>
+
+<div *ngIf="!noData">
+  <ul>
+    <li *ngFor="let communityMember of userCommunities">
+      <img [src]="communityMember.community.coverImage" alt="Imagen de {{ communityMember.community.name }}" />
+      <div class="community-content">
+        <h3>{{ communityMember.community.name }}</h3>
+        <p>Descripción: {{ communityMember.community.description }}</p>
+        <p>Estado: {{ communityMember.active ? 'Activa' : 'Inactiva' }}</p>
+      </div>
+      <button class="leave-button" (click)="leaveCommunity(communityMember)">Salir de la comunidad</button>
+    </li>
+  </ul>
+</div>
