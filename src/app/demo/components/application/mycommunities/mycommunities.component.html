@@ -1,17 +1,32 @@
-<div *ngIf="noData">
-  <p>No hay comunidades disponibles.</p>
-</div>
+<div class="p-grid p-nogutter community-container">
+  <div class="p-col-12" *ngIf="noData">
+    <p>No hay comunidades disponibles.</p>
+  </div>
 
-<div *ngIf="!noData">
-  <ul>
-    <li *ngFor="let communityMember of userCommunities">
-      <img [src]="communityMember.community.coverImage" alt="Imagen de {{ communityMember.community.name }}" />
-      <div class="community-content">
-        <h3>{{ communityMember.community.name }}</h3>
-        <p>Descripción: {{ communityMember.community.description }}</p>
-        <p>Estado: {{ communityMember.active ? 'Activa' : 'Inactiva' }}</p>
-      </div>
-      <button class="leave-button" (click)="leaveCommunity(communityMember)">Salir de la comunidad</button>
-    </li>
-  </ul>
+ 
+  <div class="p-col-12" *ngIf="!noData">
+    <ul class="community-list">
+      <li *ngFor="let communityMember of userCommunities" class="community-item">
+        <div class="community-card p-grid">
+
+          <div class="p-col-12 p-md-3 community-image-container">
+            <img [src]="communityMember.community.coverImage" 
+                 alt="Imagen de {{ communityMember.community.name }}" 
+                 class="community-image" />
+          </div>
+
+          <div class="p-col-12 p-md-6 community-content">
+            <h3>{{ communityMember.community.name }}</h3>
+            <p>Descripción: {{ communityMember.community.description }}</p>
+            <p>Estado: {{ communityMember.active ? 'Activa' : 'Inactiva' }}</p>
+          </div>
+
+          <div class="p-col-12 p-md-3 leave-button-container">
+            <button class="leave-button" (click)="leaveCommunity(communityMember.uuid)">Salir de la comunidad</button>
+
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

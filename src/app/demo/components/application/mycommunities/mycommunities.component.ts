@@ -47,8 +47,15 @@ export class MycommunitiesComponent implements OnInit {
     );
   }
 
-  leaveCommunity(community: CommunityMembership): void {
-    console.log(`prueba:`);
+  leaveCommunity(communityUuid: string): void {
+    console.log("UUID recibido:", communityUuid); // Verifica que el UUID sea una cadena y no un objeto
+    this.myCommunityService.removeCommunityMembership(communityUuid).subscribe(response => {
+      console.log(`Comunidad con UUID ${communityUuid} eliminada`);
+      this.fetchUserCommunities();
+    });
   }
+  
+  
+
   
 }
