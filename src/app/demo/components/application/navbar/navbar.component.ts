@@ -155,14 +155,14 @@ export class AppNavbarComponent {
                         this.router.navigate(['app/histories']);
                     }
                 },
-                {
-                    label: 'Recomendaciones',
-                    icon: 'pi pi-bolt'
-                },
-                {
-                    label: 'UI Kit',
-                    icon: 'pi pi-pencil'
-                }
+                // {
+                //     label: 'Recomendaciones',
+                //     icon: 'pi pi-bolt'
+                // },
+                // {
+                //     label: 'UI Kit',
+                //     icon: 'pi pi-pencil'
+                // }
             ]
         },
         {
