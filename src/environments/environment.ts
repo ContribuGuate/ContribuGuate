@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3000/api/contribuguate/v1/',
-  socket: 'http://localhost:3000'
+  baseUrl: 'https://contribuguatebe.onrender.com/api/contribuguate/v1/',
+  socket: 'https://contribuguatebe.onrender.com'
 };
 
 /*
