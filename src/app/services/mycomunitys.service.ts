@@ -18,4 +18,11 @@ export class MyCommunityService {
       .pipe(map((response: GetUserCommunitiesResponse) => response)); 
   }
 
+  public removeCommunityMembership(communityId: string): Observable<any> {
+    console.log("Enviando solicitud para eliminar comunidad con ID:", communityId); // Log para confirmar ID
+    return this.http.delete(`${environment.baseUrl}community-memberships/remove/${communityId}`);
+  }
+  
+  
+
 }

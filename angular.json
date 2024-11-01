@@ -25,7 +25,8 @@
                             "canvg",
                             "raf",
                             "rgbcolor",
-                            "core-js"
+                            "core-js",
+                            "quill"
                         ],
                         "outputPath": "dist/contribuguate",
                         "index": "src/index.html",
