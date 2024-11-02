@@ -1,32 +1,33 @@
-<div class="p-grid p-nogutter community-container">
-  <div class="p-col-12" *ngIf="noData">
-    <p>No hay comunidades disponibles.</p>
-  </div>
-
- 
-  <div class="p-col-12" *ngIf="!noData">
-    <ul class="community-list">
-      <li *ngFor="let communityMember of userCommunities" class="community-item">
-        <div class="community-card p-grid">
-
-          <div class="p-col-12 p-md-3 community-image-container">
-            <img [src]="communityMember.community.coverImage" 
-                 alt="Imagen de {{ communityMember.community.name }}" 
-                 class="community-image" />
-          </div>
-
-          <div class="p-col-12 p-md-6 community-content">
-            <h3>{{ communityMember.community.name }}</h3>
-            <p>Descripción: {{ communityMember.community.description }}</p>
-            <p>Estado: {{ communityMember.active ? 'Activa' : 'Inactiva' }}</p>
-          </div>
-
-          <div class="p-col-12 p-md-3 leave-button-container">
-            <button class="leave-button" (click)="leaveCommunity(communityMember.uuid)">Salir de la comunidad</button>
-
-          </div>
+<div class="community-container" *ngIf="!noData; else noCommunities">
+  <ul class="community-list">
+    <li *ngFor="let membership of userCommunities" class="community-item">
+      <div class="community-card">
+        <div class="community-image-container">
+          <img
+            *ngIf="membership.community.coverImage"
+            [src]="membership.community.coverImage"
+            alt="{{ membership.community.name }}"
+            class="community-image"
+          />
         </div>
-      </li>
-    </ul>
-  </div>
+        <div class="community-content">
+          <h3>{{ membership.community.name }}</h3>
+          <p *ngIf="membership.community.description">{{ membership.community.description }}</p>
+          <p *ngIf="!membership.community.description">No description available.</p>
+        </div>
+        <div class="leave-button-container">
+          <button
+            class="leave-button"
+            (click)="leaveCommunity(membership.uuid)"
+          >
+            Leave
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
+
+<ng-template #noCommunities>
+  <p>No communities found.</p>
+</ng-template>
