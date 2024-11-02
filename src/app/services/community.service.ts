@@ -20,6 +20,11 @@ export class CommunityService {
     .pipe<GetCommunitiesResponse>(map(this.extractData))
   }
 
+  public getUserCommunities() {
+    return this.http.get(environment.baseUrl + 'community')
+    .pipe(map(this.extractData))
+  }
+
   public getOne(id: string){
     return this.http.get(environment.baseUrl + 'community/' + id)
     .pipe<GetCommunityResponse>(map(this.extractData))

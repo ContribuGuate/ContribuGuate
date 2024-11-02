@@ -118,7 +118,7 @@
 
 
 <p-dialog header="Crear nuevo post" [modal]="true" [(visible)]="postVisible"
-  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }">
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '45vw' }">
   <span class="p-text-secondary block mb-5">Completa la información del post a tu gusto</span>
   <form [formGroup]="postForm">
     <div class="flex align-items-center gap-3 mb-3">
@@ -127,7 +127,7 @@
 
     </div>
 
-    <div class="flex align-items-center gap-3 mb-3">
+    <!-- <div class="flex align-items-center gap-3 mb-3">
       <label for="post" class="font-semibold w-6rem">Tipo de post*</label>
       <p-dropdown appendTo="body" id="post" [options]="postTypes" formControlName="type" optionLabel="label" [showClear]="true"
         placeholder="Selecciona un tipo de post">
@@ -143,8 +143,8 @@
           </div>
         </ng-template>
       </p-dropdown>
-    </div>
-    <div class="flex align-items-center gap-3 mb-3" *ngIf="postForm.get('type')?.value">
+    </div> -->
+    <div class="flex align-items-center gap-3 mb-3">
       <label for="comm" class="font-semibold w-6rem">Comunidad</label>
       <p-dropdown appendTo="body" id="comm" [options]="communitiesArr" formControlName="community" optionLabel="label" [showClear]="true"
         placeholder="Selecciona una comunidad">

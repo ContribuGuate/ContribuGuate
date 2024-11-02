@@ -5,6 +5,7 @@ import { CommunityService } from 'src/app/services/community.service';
 import { environment } from 'src/environments/environment';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MenuItem } from 'primeng/api';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-community',
@@ -15,7 +16,7 @@ export class CommunityComponent {
   public logosEndpoint = environment.baseUrl + 'community/logo/'
   public organization: any = ''
   public communityObj: any = {}
-  public inviteLink: string = 'https://test.com/invite/abcdefg';
+  public inviteLink: string = '';
   public items: MenuItem[] = [];
   posts = [
     {
@@ -33,7 +34,7 @@ export class CommunityComponent {
     // Otros posts...
   ];
   constructor(private route: ActivatedRoute, private community: CommunityService, private toast: ToastrService,
-    private router: Router, private clipboard: Clipboard
+    private router: Router, private clipboard: Clipboard, private sanitizer: DomSanitizer
   ) {
     this.route.paramMap.subscribe(paramMap => {
       this.organization = paramMap.get('id');
@@ -41,6 +42,7 @@ export class CommunityComponent {
         .subscribe((e) => {
           if (e.success == true) {
             this.communityObj = e.community
+            this.inviteLink = `${window.location.origin}/app/community/${this.communityObj.uuid}`;
           } else {
             this.toast.error(e.message ?? "Error al cargar comunidad", "Comunidades", {
               timeOut: 4500
@@ -97,6 +99,10 @@ export class CommunityComponent {
       })
     }
 
+  }
+
+  getSanitizedHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
   public donate() {

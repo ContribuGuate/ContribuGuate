@@ -83,17 +83,12 @@
                     </p-inputGroup> -->
                 </div>
                 <div>
-                  <span class="font-medium text-900 block mb-2">Perfil de usuario</span>
                   <ul class="list-none p-0 m-0 flex flex-column gap-3">
                       <li class="flex align-items-center gap-2">
                           <!-- <img [src]="'https://primefaces.org/cdn/primeng/images/demo/avatar/' + member.image" style="width: 32px" /> -->
                           <div>
-                              <span class="font-medium">Example user</span>
-                              <div class="text-sm text-color-secondary">test</div>
-                          </div>
-                          <div class="flex align-items-center gap-2 text-color-secondary ml-auto text-sm">
-                              <span>Rol: miembro</span>
-                              <i class="pi pi-angle-down"></i>
+                              <span class="font-medium">O usa el siguiente código de invitación:</span>
+                              <div class="text-sm text-color-secondary">{{communityObj.code}}</div>
                           </div>
                       </li>
                   </ul>
@@ -113,16 +108,75 @@
 
   <div class="p-col-12 p-md-8 p-lg-9">
 
-    <div class="recent-publications" *ngIf="communityObj.public">
+    <div class="recent-publications" *ngIf="communityObj.public && communityObj.posts.length > 0">
       <h2>Publicaciones recientes</h2>
       <div class="p-grid p-nogutter">
-        <div class="p-col-12 p-md-6 p-lg-4" *ngFor="let post of posts">
-          <div class="post-card">
-            <img [src]="post.image" alt="Post Image" class="post-image" />
-            <div class="post-content">
-              <h3>{{ post.title }}</h3>
-              <p>{{ post.description }}</p>
-              <small>Posted on: {{ post.date | date }}</small>
+        <div class="p-col-12 p-md-6 p-lg-4" *ngFor="let post of communityObj.posts">
+          <div class="surface-card p-4 border-round shadow-2">
+            <div class="flex align-items-center mb-2">
+              <div class="mr-2">
+                <p-avatar image="../../../../../assets/layout/images/logo outline.png" styleClass="mr-2"
+                  [style]="{ 'background-color': '#ece9fc', color: '#2a1261' }" size="large" shape="circle" />
+              </div>
+              <div>
+                <span class="font-medium text-900">{{ '@' + post.author.username }}</span> <br />
+                <span class="text-600 text-sm">{{ post.createdAt | timeago }}</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div [innerHTML]="getSanitizedHtml(post.description)"></div>
+              
+              <!-- Contenedor para botón y conteos de reacciones -->
+              <!-- <div class="flex align-items-center justify-content-between" *ngIf="post.reactions">
+                <p-button pRipple [text]="true" severity="secondary" [plain]="true" label="Reaccionar"
+                  icon="pi pi-thumbs-up" iconPos="left" (onClick)="op.toggle($event)"></p-button>
+                
+                <div class="flex align-items-center">
+                  <p-avatar icon="pi pi-thumbs-up" pBadge [value]="getReactionCounts(post).like" 
+                    styleClass="mr-2" size="small" [pTooltip]="getReactionCounts(post).like + ' Me gusta'" tooltipPosition="bottom"
+                    [style]="{ 'background-color': '#d2f18b', color: '#000' }" />
+
+                  <p-avatar icon="pi pi-heart" pBadge [value]="getReactionCounts(post).love" 
+                    styleClass="ml-2" size="small" [pTooltip]="getReactionCounts(post).love + ' Me encanta'" tooltipPosition="bottom"
+                    [style]="{ 'background-color': '#f19a8b', color: '#000' }" />
+
+                  <p-avatar icon="pi pi-bolt" pBadge [value]="getReactionCounts(post).inspire" 
+                    styleClass="ml-2" size="small" [pTooltip]="getReactionCounts(post).inspire + ' Me inspira'" tooltipPosition="bottom"
+                    [style]="{ 'background-color': '#f1e58b', color: '#000' }" />
+                </div>
+              </div> -->
+
+              <!-- <p-overlayPanel #op>
+                <div class="flex flex-column gap-3 w-full md:w-25rem">
+                  <div>
+                    <span class="font-medium text-900 block mb-2">Reaccionar a la publicación</span>
+                  </div>
+                  <div>
+                    <div class="flex flex-row justify-content-center align-items-center gap-2 flex-nowrap">
+                      <p-button [label]="getReactionLabel('like', post)" (click)="react('like', post.uuid)"
+                        severity="success" icon="pi pi-thumbs-up" class="flex-grow-1" />
+                      <p-button [label]="getReactionLabel('love', post)" (click)="react('love', post.uuid)"
+                        severity="danger" icon="pi pi-heart" class="flex-grow-1" />
+                      <p-button [label]="getReactionLabel('inspire', post)" (click)="react('inspire', post.uuid)"
+                        severity="warning" icon="pi pi-bolt" class="flex-grow-1" />
+                    </div>
+                  </div>
+                </div>
+              </p-overlayPanel> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recent-publications" *ngIf="communityObj.public && communityObj.posts.length === 0">
+      <div class="p-grid p-nogutter">
+        <div class="p-col-12 p-md-6 p-lg-4">
+          <div class="surface-card p-4 border-round shadow-2">
+            <div class="flex align-items-center mb-2">
+              <div class="mr-2">
+                <h2>No hay publicaciones registradas.</h2>
+              </div>
             </div>
           </div>
         </div>

@@ -24,8 +24,8 @@
                         <div class="flex flex-column md:align-items-end gap-5">
                             <div class="flex flex-row-reverse md:flex-row gap-2">
                                 <!-- <p-button icon="pi pi-heart" [outlined]="true" /> -->
-                                <p-button *ngIf="item.public" icon="pi pi-plus" class="flex-auto md:flex-initial white-space-nowrap" label="Unirse" (click)="join(item)" />
-                                <p-button *ngIf="!item.public" icon="pi pi-lock" class="flex-auto md:flex-initial white-space-nowrap" label="Solicitar unirse" (click)="joinWithPassword(item)" />
+                                <p-button *ngIf="item.public" [icon]="getCommunityButton(item).icon" class="flex-auto md:flex-initial white-space-nowrap" [disabled]="getCommunityButton(item).disabled" [label]="getCommunityButton(item).label" (click)="join(item)" />
+                                <p-button *ngIf="!item.public" [icon]="getCommunityButton(item).icon" class="flex-auto md:flex-initial white-space-nowrap" [disabled]="getCommunityButton(item).disabled" [label]="getCommunityButton(item).label" (click)="joinWithPassword(item)" />
                             </div>
                         </div>
                     </div>
@@ -54,8 +54,8 @@
                         </div>
                         <div class="flex flex-column gap-4 mt-4">
                             <div class="flex gap-2">
-                                <p-button *ngIf="product.public" icon="pi pi-plus" class="flex-auto md:flex-initial white-space-nowrap" label="Unirse" (click)="join(product)" />
-                                <p-button *ngIf="!product.public" icon="pi pi-lock" class="flex-auto md:flex-initial white-space-nowrap" label="Solicitar unirse" (click)="joinWithPassword(item)" />
+                                <p-button *ngIf="product.public" [icon]="getCommunityButton(product).icon" class="flex-auto md:flex-initial white-space-nowrap" [disabled]="getCommunityButton(product).disabled" [label]="getCommunityButton(product).label" (click)="join(product)" />
+                                <p-button *ngIf="!product.public" [icon]="getCommunityButton(product).icon" class="flex-auto md:flex-initial white-space-nowrap" [disabled]="getCommunityButton(product).disabled" [label]="getCommunityButton(product).label" (click)="joinWithPassword(product)" />
                                 <!-- <p-button icon="pi pi-heart" [outlined]="true" /> -->
                             </div>
                         </div>

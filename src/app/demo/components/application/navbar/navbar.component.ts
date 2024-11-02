@@ -169,10 +169,10 @@ export class AppNavbarComponent {
             label: 'Mi cuenta',
             icon: 'pi pi-user',
             items: [
-                {
-                    label: 'Configuracion',
-                    icon: 'pi pi-cog'
-                },
+                // {
+                //     label: 'Configuracion',
+                //     icon: 'pi pi-cog'
+                // },
                 {
                     label: 'Informacion personal',
                     icon: 'pi pi-id-card',
@@ -213,25 +213,11 @@ export class AppNavbarComponent {
 
         this.postForm = this.fb.group({
             description: ['', Validators.required],
-            type: [null, Validators.required],
             community: [null]
         })
         this.getProfile()
-        this.countries = [
-            { name: 'Australia', code: 'AU' },
-            { name: 'Brazil', code: 'BR' },
-            { name: 'China', code: 'CN' },
-            { name: 'Egypt', code: 'EG' },
-            { name: 'France', code: 'FR' },
-            { name: 'Germany', code: 'DE' },
-            { name: 'India', code: 'IN' },
-            { name: 'Japan', code: 'JP' },
-            { name: 'Spain', code: 'ES' },
-            { name: 'United States', code: 'US' }
-        ];
 
-
-        this.communities.getCommunities()
+        this.communities.getUserCommunities()
         .subscribe((e) => {
             if(e.success == true){
                 this.communitiesArr = e.communities
@@ -267,7 +253,7 @@ export class AppNavbarComponent {
 
 
       public async addPost(){
-        console.log(this.postForm.value)
+        
         this.postService.addPost(this.postForm.value).subscribe((e) => {
             if(e.success == true){
                 this.postVisible = false;

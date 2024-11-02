@@ -24,11 +24,8 @@ export class PostService {
 
   public addPost(form: any): Observable<any> {
     var body = {
-      title: form.title,
       description: form.description,
-      image: form.image,
-      type: form.type.name,
-      community: form.community
+      community: form.community.uuid
     };
     return this.http.post(environment.baseUrl + 'post', body)
       .pipe(map(this.extractData));

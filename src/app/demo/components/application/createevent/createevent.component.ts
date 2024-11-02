@@ -28,7 +28,7 @@ export class CreateeventComponent {
   }
 
   getCommunities(){
-    this.communityService.getCommunities()
+    this.communityService.getUserCommunities()
     .subscribe((e) => {
       if(e.success == true){
         this.communities = e.communities

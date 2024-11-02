@@ -18,7 +18,16 @@ export class EventService {
   }
 
   public addEvent(form: any) : Observable<any>{
-    return this.http.post(environment.baseUrl + 'event/add', form)
+    var body = {
+      name: form.name,
+      description: form.description,
+      address: form.address,
+      date: form.date,
+      link: form.link,
+      image: form.image,
+      community: form.community.uuid
+    }
+    return this.http.post(environment.baseUrl + 'event/add', body)
     .pipe(map(this.extractData))
   }
 }

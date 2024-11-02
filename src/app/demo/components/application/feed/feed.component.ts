@@ -27,7 +27,6 @@ export class FeedComponent {
     this.getPosts()
 
     this.userId = this.authService.getUserId()
-    console.log(this.userId)
 
     this.postService.onPostAdded((data) => {
       this.posts.unshift(data)

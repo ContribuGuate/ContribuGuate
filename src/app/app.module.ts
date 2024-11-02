@@ -26,7 +26,7 @@ import { strings as spanishStrings } from 'ngx-timeago/language-strings/es';
     declarations: [AppComponent, NotfoundComponent],
     imports: [AppRoutingModule, AppLayoutModule, 
         NgxUiLoaderModule.forRoot({
-            fgsType: "folding-cube",
+            fgsType: "wandering-cubes",
             fgsColor: "#03a9f4",
             fgsSize: 70,
             hasProgressBar: true,
@@ -34,6 +34,9 @@ import { strings as spanishStrings } from 'ngx-timeago/language-strings/es';
             logoUrl: '../assets/layout/images/logo.png',
             blur: 5,
             bgsSize: 60,
+            bgsColor: "#03a9f4",
+            bgsOpacity: 0.5,
+            bgsPosition: "bottom-right",
             gap: 24,
             logoSize: 120,
             text: "Cargando..."
